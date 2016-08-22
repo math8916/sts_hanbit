@@ -1,4 +1,4 @@
-package com.hanbit.web;
+package com.hanbit.web.home;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -24,16 +24,9 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
-		return "home/main";
+		logger.info("Welcome home! The client locale is rrrrr{}", "디버깅 모드");
+	
+		return "home";
 	}
 	
 }
