@@ -1,7 +1,5 @@
 package com.hanbit.web.home;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -10,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import com.hanbit.web.home.HomeController;
 /**
  * Handles requests for the application home page.
  */
@@ -27,6 +25,10 @@ public class HomeController {
 		logger.info("Welcome home! The client locale is 333{}", "디버깅 모드");
 	
 		return "global/content.tiles";
+	}
+	@RequestMapping("/school_info")
+	public String schoolInfo() {
+		return "global/school_info.tiles";
 	}
 	
 }

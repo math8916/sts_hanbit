@@ -1,30 +1,42 @@
-/* var application=()(); IIFE 패턴*/
-
-
-var application=(function(){
-		
-		var init = function(param) {
-			sessionStorage.setItem('context',param);
-			
+var app=(function(){
+		var init = function(context) {
+			sessionStorage.setItem('context',context);
+			move();
 		} ;
-		var getContextPath = function() {
+		var context= function() {
 			return sessionStorage.getItem('context');
-		} 
+		} ; 
 		var to_douglas = function() {
 		
-			location.href=getContextPath()+"/douglas.do";
+			location.href=context()+"/douglas.do";
 			console.log("to-douglas:"+context);
 		} ;
-		var go_home = function() {
-			
-			location.href=getContextPath()+"/home.do";
-		} ;
-		
+		var move = function() {
+			$('#title').click(function(){
+			location.href=context()+"/";
+		}) ;
+			$('#a_member').click(function(){	location.href= context() + "/member/main";
+			});
+
+
+			$('#a_grade').click(function(){
+				location.href=context() + "/grade/main";
+			});
+
+
+			$('#a_account').click(function(){
+				location.href=context() + "/account/main";
+			});
+
+			$('#a_school').click(function(){
+				location.href=context() + "/school_info";
+			});
+}
 		return{
 			init :init,
 			to_douglas : to_douglas,
-			
-			go_home:go_home
+			move:move,
+			context:context
 		}
 })();
 	

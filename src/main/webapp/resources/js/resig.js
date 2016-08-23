@@ -1,4 +1,4 @@
-var  grade =(function(){
+var grade =(function(){
 
 	return{
 		init :function() {

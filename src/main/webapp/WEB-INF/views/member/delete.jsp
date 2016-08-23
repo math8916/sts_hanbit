@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<jsp:include page= "../global/top.jsp" />
-<jsp:include page= "../global/header.jsp" />
-<jsp:include page= "../global/nav.jsp" />
 	<div style="text-align: center">
 	<%-- 	<%		MemberService service = MemberServiceImpl.getInstanceImpl();
 		
@@ -30,5 +27,4 @@
 			href="${context }/global/main.jsp"><img src="${img }/img/home.png" alt="home"
 			style="width: 30px" /></a>
 	</div>
-<jsp:include page= "../global/footer.jsp" />
-<jsp:include page= "../global/end.jsp" />
+
