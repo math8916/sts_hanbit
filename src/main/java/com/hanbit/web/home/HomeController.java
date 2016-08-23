@@ -24,9 +24,9 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is rrrrr{}", "디버깅 모드");
+		logger.info("Welcome home! The client locale is 333{}", "디버깅 모드");
 	
-		return "home";
+		return "global/content.tiles";
 	}
 	
 }
