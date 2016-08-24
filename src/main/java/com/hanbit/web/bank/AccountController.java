@@ -15,42 +15,42 @@ public class AccountController {
 		logger.info("Welcome accountController! go Main", "디버깅 모드");
 		return "account/content.tiles";
 	}
-	@RequestMapping("/regist")
+	@RequestMapping("/b_regist")
 	public String moveRegist(){
 		logger.info("Welcome AccountController! go regist", "디버깅 모드");
 		return "account/regist.tiles";
 	}
-	@RequestMapping("/deposit")
+	@RequestMapping("/b_deposit")
 	public String moveDeposit(){
 		logger.info("Welcome AccountController! go deposit", "디버깅 모드");
 		return "account/deposit.tiles";
 	}
-	@RequestMapping("/withdraw")
+	@RequestMapping("/b_withdraw")
 	public String movewithdraw(){
 		logger.info("Welcome AccountController! go withdraw", "디버깅 모드");
 		return "account/withdraw.tiles";
 	}
-	@RequestMapping("/update")
+	@RequestMapping("/b_update")
 	public String moveupdate(){
 		logger.info("Welcome AccountController! go update", "디버깅 모드");
 		return "account/update.tiles";
 	}
-	@RequestMapping("/delete")
+	@RequestMapping("/b_delete")
 	public String movedelete(){
 		logger.info("Welcome AccountController! go delete", "디버깅 모드");
 		return "account/delete.tiles";
 	}
-	@RequestMapping("/list")
+	@RequestMapping("/b_list")
 	public String movelist(){
 		logger.info("Welcome AccountController! go list", "디버깅 모드");
 		return "account/list.tiles";
 	}
-	@RequestMapping("/search")
+	@RequestMapping("/b_search")
 	public String movesearch(){
 		logger.info("Welcome AccountController! go search", "디버깅 모드");
 		return "account/search.tiles";
 	}
-	@RequestMapping("/count")
+	@RequestMapping("/b_count")
 	public String movecount(){
 		logger.info("Welcome AccountController! go count", "디버깅 모드");
 		return "account/count.tiles";

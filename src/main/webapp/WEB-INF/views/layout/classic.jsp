@@ -63,11 +63,14 @@
   <script src="${js}/admin.js">  </script>
   <script src="${js}/douglas.js">  </script>
   <script src="${js}/resig.js"> </script>
+    <script src="${js}/account.js"> </script>
   <script> 
    app.init('${context}');
    admin.init();
    douglas.init();
    grade.init(); 
    member.init();
+   account.init();
+   
    </script>
 </html>

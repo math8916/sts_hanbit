@@ -64,3 +64,8 @@
        margin-left: auto;
        margin-right: auto;
     }
+
+.center{margin: 0 auto;}
+.text_left{text-align: left;}
+.remove_underline{text-decoration :none}
+.cursor{cursor:pointer}

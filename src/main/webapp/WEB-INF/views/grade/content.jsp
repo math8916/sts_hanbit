@@ -15,7 +15,4 @@
 	<a href="${context }/global.do" ><img src="${img }/home.png" alt="home" id="img_home"/></a>
 
 </section>
-<script src="${js}/resig.js"></script>
-<script type="text/javascript">
-grade.init();
-</script>
+

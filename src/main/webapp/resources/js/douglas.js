@@ -32,7 +32,7 @@ var douglas = (function(){
 	};
 })();
 
-var account = (function() {
+var account2 = (function() {
 	var _account_no, _money;
 	var setAccountNo = function(account_no){this._account_no=account_no;};
 	var getAccountNo = function(){return this._account_no;};
@@ -45,10 +45,8 @@ var account = (function() {
 		 setMoney : setMoney,
 		 getMoney : getMoney,
 		init : function() {
-			document.querySelector('#bt_spec_show').addEventListener('click',
-					member2.spec, false);
-			document.querySelector('#bt_make_account').addEventListener(
-					'click', this.spec, false);
+			$('#bt_spec_show').click(function() {move(context,'spec_show');},false);
+			$('#bt_make_account').click(function() {move(context,'spec');},false);
 			document.querySelector('#bt_money_deposit').addEventListener(
 					'click', this.deposit, false);
 			document.querySelector('#bt_money_withdraw').addEventListener(

@@ -10,22 +10,22 @@ var grade =(function(){
 
 			$('#title').css('font-size', '40px');
 			$('#a_regist').click(function() {
-				location.href = "${context }/grade?page=regist";
-			});
+				location.href = app.context()+"/grade/regist"
+			})
 			$('#a_update').click(function() {
-				location.href = "${context }/grade?page=update";
+				location.href = app.context()+"/grade/update"
 			});
 			$('#a_delete').click(function() {
-				location.href = "${context }/grade?page=delete";
+				location.href =app.context()+"/grade/delete"
 			});
 			$('#a_list').click(function() {
-				location.href = "${context }/grade?page=list";
+				location.href = app.context()+"/grade/list"
 			});
 			$('#a_count').click(function() {
-				location.href = "${context }/grade?page=count";
+				location.href =app.context()+"/grade/count"
 			});
 			$('#a_search').click(function() {
-				location.href = "${context }/grade?page=search";
+				location.href =app.context()+"/grade/search"
 			});
 		}
 			
