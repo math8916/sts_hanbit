@@ -10,7 +10,7 @@ var member=(function() {
 			   $('#list').click(function(){location.href=app.context()+"/member/list"})
 			   $('#find_by').click(function(){location.href=app.context()+"/member/find_by"})
 			   $('#count').click(function(){location.href=app.context()+"/member/count"})
-			   $('#member_content_img_home').attr('src',app.img()+'/home.png').css('width','30px');
+			   $('#member_content_img_home').attr('src',app.img()+'/home.png').css('width','30px').css('alt','home');
 			   $('#member_content_a_home').click(function(){location.href=app.context()+"/"})
 			   $('#member_content').addClass('box').addClass('font_size_20px').addClass('cursor');
 			   $('#member_content>article>').css('width','300px')
