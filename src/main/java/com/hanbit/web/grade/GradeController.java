@@ -13,7 +13,7 @@ public class GradeController {
 	@RequestMapping("/main")
 	public String goMain() {
 		logger.info("Welcome gradeController! go Main", "디버깅 모드");
-		return "grade/content.tiles";
+		return "admin:grade/content.tiles";
 	}
 	@RequestMapping("/regist")
 	public String moveRegist(){

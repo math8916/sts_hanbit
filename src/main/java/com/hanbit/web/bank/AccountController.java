@@ -13,12 +13,12 @@ public class AccountController {
 	@RequestMapping("/main")
 	public String goMain(){
 		logger.info("Welcome accountController! go Main", "디버깅 모드");
-		return "account/content.tiles";
+		return "admin:account/content.tiles";
 	}
 	@RequestMapping("/b_regist")
 	public String moveRegist(){
 		logger.info("Welcome AccountController! go regist", "디버깅 모드");
-		return "account/regist.tiles";
+		return "admin:account/regist.tiles";
 	}
 	@RequestMapping("/b_deposit")
 	public String moveDeposit(){
@@ -38,21 +38,21 @@ public class AccountController {
 	@RequestMapping("/b_delete")
 	public String movedelete(){
 		logger.info("Welcome AccountController! go delete", "디버깅 모드");
-		return "account/delete.tiles";
+		return "admin:account/delete.tiles";
 	}
 	@RequestMapping("/b_list")
 	public String movelist(){
 		logger.info("Welcome AccountController! go list", "디버깅 모드");
-		return "account/list.tiles";
+		return "admin:account/list.tiles";
 	}
 	@RequestMapping("/b_search")
 	public String movesearch(){
 		logger.info("Welcome AccountController! go search", "디버깅 모드");
-		return "account/search.tiles";
+		return "admin:account/search.tiles";
 	}
 	@RequestMapping("/b_count")
 	public String movecount(){
 		logger.info("Welcome AccountController! go count", "디버깅 모드");
-		return "account/count.tiles";
+		return "admin:account/count.tiles";
 	}
 }

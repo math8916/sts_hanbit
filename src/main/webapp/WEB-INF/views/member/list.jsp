@@ -1,66 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<style>
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
-
-td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-}
-
-tr:nth-child(even) {
-    background-color: #dddddd;
-}
-
-p{text-align: center;}
-</style>
-<div style="text-align: center">
-	
-	<table>
-	  <tr>
-    <td>ID</td>
-    <td>이름</td>
-    <td>등록일</td>
-    <td>생년월일</td>
-  </tr>
-  <tr>
-    <td>hong</td>
-    <td><a href="detail.jsp">홍길동</a></td>
-    <td>2016-07-03</td>
-    <td>901001</td>
-  </tr>
-    <tr>
-    <td>lee</td>
-    <td><a href="detail.jsp">이순신</a></td>
-    <td>2016-07-03</td>
-    <td>031001</td>
-  </tr>
-    <tr>
-    <td>song</td>
-    <td><a href="detail.jsp">송지효</a></td>
-    <td>2016-07-03</td>
-    <td>991001</td>
-  </tr>
-    <tr>
-    <td>park</td>
-    <td><a href="detail.jsp">박지성</a></td>
-    <td>2016-07-03</td>
-    <td>061001</td>
-  </tr>
-    <tr>
-    <td>kim</td>
-    <td><a href="detail.jsp">김유신</a></td>
-    <td>2016-07-03</td>
-    <td>951001</td>
-  </tr>
+<div class="box">
+<div class="panel panel-default">
+  <div class="panel-heading">Student List</div>
+  <div class="panel-body">
+  </div>
+<table id="member_list" class="table">
+   <tr>
+       <td>ID</td>
+       <td>Name</td>
+       <td>Regist Date</td>
+       <td>Birth</td>
+       <td>E-mail</td>
+       <td>Phone</td>
+   </tr>
+   <c:forEach var="member" items="${list}">
+   <tr>
+       <td>${member.id}</td>
+       <td><a href="${context}/member.do?action=find_by_id&page=find_by_id&keyword=${member.id}">${member.name}</a></td>
+       <td>${member.regDate}</td>
+       <td>${member.ssn}</td>
+       <td>${member.email}</td>
+       <td>${member.phone}</td>
+   </tr>
+   </c:forEach>
 </table>
-	
-	<a href="${context }/member/main.jsp"><img src="${img }/member.png" alt="member" style="width:30px" /></a>
-	<a href="${context }/global/main.jsp"><img src="${img }/home.png" alt="home" style="width:30px" /></a>
-	</div>
+</div>
 
+
+   <a id="member_content_a_member"><img id="member_content_img_member"/></a>
+   <a id="member_content_a_home"><img id="member_content_img_home"/></a>
+</div>

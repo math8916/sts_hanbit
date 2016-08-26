@@ -16,46 +16,47 @@ public class MemberController {
 	@RequestMapping ("/main")
 	public String goMain() {
 		logger.info("Welcome MemberController! go Main", "디버깅 모드");
-		return "member/content.tiles";
+		return "admin:member/content.tiles";
 	}
 	@RequestMapping("/regist")
 	public String moveRegist() {
-		logger.info("Welcome MemberController! go Main", "디버깅 모드");
-		return "member/regist.tiles";
+		logger.info("Welcome MemberController regist! go regist", "디버깅 모드");
+		return "public:member/regist.tiles";
 	}
 	@RequestMapping("/find_by_id")
 	public String moveFind_by_id() {
-		logger.info("Welcome MemberController! go Main", "디버깅 모드");
-		return "member/find_by_id.tiles";
+		logger.info("Welcome MemberController! go detail", "디버깅 모드");
+		return "user:member/find_by_id.tiles";
 	}
 	@RequestMapping("/update")
 	public String moveUpdate() {
-		logger.info("Welcome MemberController! go Main", "디버깅 모드");
-		return "member/update.tiles";
+		logger.info("Welcome MemberController! go update", "디버깅 모드");
+		return "user:member/update.tiles";
 	}
 	@RequestMapping("/delete")
 	public String moveDelete() {
-		logger.info("Welcome MemberController! go Main", "디버깅 모드");
-		return "member/delete.tiles";
+		logger.info("Welcome MemberController! go delete", "디버깅 모드");
+		return "user:member/delete.tiles";
 	}
 	@RequestMapping("/login")
 	public String moveLogin() {
-		return "member/login.tiles";
+		logger.info("Welcome MemberController! go login", "디버깅 모드");
+		return "public:member/login.tiles";
 	}
 	@RequestMapping("/logout")
 	public String moveLogout() {
-		return "member/logout.tiles";
+		return "user:member/logout.tiles";
 	}
 	@RequestMapping("/list")
 	public String moveList() {
-		return "member/list.tiles";
+		return "admin:member/list.tiles";
 	}
 	@RequestMapping("/find_by")
 	public String moveFind_by() {
-		return "member/find_by.tiles";
+		return "admin:member/find_by.tiles";
 	}
 	@RequestMapping("/count")
 	public String moveCount() {
-		return "member/count.tiles";
+		return "admin:member/count.tiles";
 	}
 }
