@@ -24,6 +24,9 @@
 		<ojdbc6-version>11.1.0.7.0</ojdbc6-version>
 		<mysql-connector-java-version>5.1.6</mysql-connector-java-version>
 		<tiles-version>3.0.5</tiles-version>
+		<mybatis-spring-version>1.2.2</mybatis-spring-version>
+		<mybatis-version>3.4.1</mybatis-version>
+		
 
 
 	</properties>
@@ -47,6 +50,11 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
 		<dependency>
@@ -250,12 +258,12 @@
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
-			<version>3.2.7</version>
+			<version>${mybatis-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis-spring</artifactId>
-			<version>1.1.1</version>
+			<version>${mybatis-spring-version}</version>
 		</dependency>
 
 		<!-- 파일업로드 -->
@@ -353,5 +361,11 @@
 			<name>ORACLE JDBC Repository</name>
 			<url>http://maven.jahia.org/maven2</url>
 		</repository>
+		
+		
+		
 	</repositories>
+	
+	
+	
 </project>

@@ -15,7 +15,7 @@ import com.hanbit.web.bank.AccountServiceImpl;
  */
 public class MemberServiceImpl implements MemberService {
 	
-	MemberDAO dao = MemberDAO.getInstance();
+	MemberDAO dao = MemberDAOImpl.getInstance();
 	AccountService accService = AccountServiceImpl.getInstence();
 	
 	MemberBean session;
