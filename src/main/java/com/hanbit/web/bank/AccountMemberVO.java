@@ -6,7 +6,7 @@ package com.hanbit.web.bank;
 혻* @file혻 : AccountMemberBean.java
 혻* @story혻 :
 혻*/
-public class AccountMemberBean {
+public class AccountMemberVO {
 	private String id, pw, name, regDate, gender, ssn;
 	private int birth, accountNo, money;
 	public String getId() {

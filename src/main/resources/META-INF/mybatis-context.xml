@@ -28,35 +28,32 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
-<context:property-placeholder location="classpath:config/database.properties"/>
-	<bean
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="location">
+<!-- <context:property-placeholder location="classpath:config/database.properties"/> -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
 			<value>classpath:config/database.properties</value>
 		</property>
+	</bean> 
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${jdbc.driver}"/>
+		<property name="url" value="${jdbc.url}"/>
+		<property name="username" value="${jdbc.username}"/>
+		<property name="password" value="${jdbc.password}"/>
 	</bean>
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource"></property>
+	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
 		<property name="mapperLocations">
 			<list>
-				<value>classpath:META-INF/myBatis/member.xml
-				</value>
+				<value>classpath:META-INF/mybatis/*.xml</value>
 			</list>
 		</property>
 	</bean>
-	<bean id="sqlSessionFactoryTemplate" class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg ref="sqlSessionFactory"></constructor-arg>
-	</bean>
-	 <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"> 
-		<property name="driverClassName" value="${jdbc.driver}"></property> 
-		<property name="url" value="${jdbc.url}"></property> 
-		<property name="username" value="${jdbc.username}"></property> 
-		<property name="password" value="${jdbc.password}"></property> </bean> 
-	<bean id="memberDAO" class="com.hanbit.web.member.MemberDAOImpl">
-		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactoryBean"/>
 	</bean>
 	
-	  <bean id="dataSourceTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"> 
- <property name="dataSource" ref="dataSource"> </property>
- </bean>    
+	<bean id="dataSourceTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
 </beans>

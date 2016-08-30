@@ -13,14 +13,14 @@ import java.util.Date;
  * @file  : Student.java
  * @story :
  */
-public class MemberBean implements Serializable{
+public class MemberVO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String id, pw, name, regDate, gender, ssn, profileImg, email;
 	private int birth;
 	
-	public MemberBean() {}
+	public MemberVO() {}
 	
-	public MemberBean(String id,String pw, String name, String ssn, String email, String profileImg) {
+	public MemberVO(String id,String pw, String name, String ssn, String email, String profileImg) {
 		this.id = id;
 		this.pw = pw;
 		this.name = name;

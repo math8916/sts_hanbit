@@ -13,13 +13,14 @@ import com.hanbit.web.util.CommonService;
  * @file  : StudentService.java
  * @story :
  */
+
 public interface MemberService extends CommonService{
-	public String regist(MemberBean mem);
-	public void update(MemberBean mem);
-	public void delete(MemberBean mem);
-	public MemberBean findById(String id);
-	public String login(MemberBean member);
-	public MemberBean getSession();
-	public void logoutSession(MemberBean member);
+	public String regist(MemberVO mem);
+	public void update(MemberVO mem);
+	public void delete(MemberVO mem);
+	public MemberVO findById(String id);
+	public String login(MemberVO member);
+	public MemberVO getSession();
+	public void logoutSession(MemberVO member);
 	
 }

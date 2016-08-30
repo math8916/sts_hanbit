@@ -33,7 +33,7 @@ var app=(function(){
 			$('#a_grade').click(function(){controller.move('grade','main');});
 			$('#a_account').click(function(){controller.move ('account','main');});
 			$('#a_school').click(function(){controller.move ('','school_info');	});
-}
+					};
 		return{
 			init : init,
 			onCreate : onCreate,
@@ -42,8 +42,8 @@ var app=(function(){
 			img : img,
 			js : js,
 			css : css
-		}
-})();
+		};
+		})();
 var user = (function(){
 	var init = function() {
 		$('#member_content_img_home').attr('src',app.img()+'/home.png');
@@ -164,7 +164,10 @@ var member = (function() {
 		   $('#member_regist_form #rd_major >label:gt(0)').addClass('radio-inline');
 		   $('#member_regist_form #ck_subject').addClass('checkbox');
 		   $('#member_regist_form #ck_subject >label').addClass('checkbox-inline');
-
+		   $('#member_find_form').attr('action',app.context()+'/member/search');
+		   $('#member_find_form input[type="hidden"]').attr('name','context')
+		   .attr('value',app.context());
+			
 	};
 	var onCreate = function() {
 		setContentView();
@@ -177,7 +180,9 @@ var member = (function() {
 		   $('#list').click(function(){location.href=controller.move('member','list')})
 		   $('#find_by').click(function(){location.href=controller.move('member','find_by')})
 		   $('#count').click(function(){location.href=controller.move('member','count')})
-	}
+		   $('#member_find_form input[type="submit"]').click(function(){('#member_find_form').submit();});
+
+	};
 	return{
 		setSsn : setSsn,
 		setName : setName,

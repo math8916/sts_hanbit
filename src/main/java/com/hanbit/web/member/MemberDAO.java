@@ -3,14 +3,14 @@ package com.hanbit.web.member;
 import java.util.List;
 
 public interface MemberDAO {
-	public int insert(MemberBean mem);
-	public void update(MemberBean mem);
-	public void delete(MemberBean mem);
+	public int insert(MemberVO mem);
+	public int update(MemberVO mem);
+	public int delete(MemberVO mem);
 	public List<?> list();
-	public MemberBean findById(String pk);
+	public MemberVO findById(String pk);
 	public List<?> findByName(String name);
 	public int count();
-	public boolean login(MemberBean param);
+	public boolean login(MemberVO param);
 	public boolean existId(String id);
 
 }

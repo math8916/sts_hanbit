@@ -6,7 +6,7 @@ package com.hanbit.web.grade;
  * @file  : GradeMemberBean.java
  * @story  :
  */
-public class GradeMemberBean {
+public class GradeMemberVO {
 	private String id, grade,seq,examDate,type,score, pw, name, regDate, gender, ssn;
 	private int java, sql, html, js, birth;
 	public String getId() {

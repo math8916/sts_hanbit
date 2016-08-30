@@ -1,170 +1,97 @@
 package com.hanbit.web.member;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
-import org.mybatis.spring.support.SqlSessionDaoSupport;
-
-import com.hanbit.web.util.Constants;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 
 /**
  *  * @date  : 2016. 7. 1.  * @author: 배근홍  * @file  : MemberDAO.java  * @story 
  * :  
  */
-
-public class MemberDAOImpl extends SqlSessionDaoSupport implements MemberDAO {
-	Connection con;
-	Statement stmt;
-	ResultSet rs;
-	PreparedStatement pstmt;
-	private static MemberDAOImpl instance = new MemberDAOImpl();
-
+@Repository
+public class MemberDAOImpl implements MemberDAO {
+	   private static final Logger logger = LoggerFactory.getLogger(MemberDAOImpl.class);
+	private SqlSessionFactory sqlSessionFactory = null;
+	private static MemberDAOImpl instance; 
+	private static final String NAMESPACE = "mapper.member."; 
+    public MemberDAOImpl(SqlSessionFactory sqlSessionFactory) {
+	  this.sqlSessionFactory = sqlSessionFactory;
+    }
+    public static MemberDAOImpl getDao() {
+		return dao;
+	}
+	private static MemberDAOImpl dao = new MemberDAOImpl(); 
+	private MemberDAOImpl() {
+		try{
+	         InputStream is = Resources.getResourceAsStream("config/mybatis-config.xml");
+	         sqlSessionFactory = new SqlSessionFactoryBuilder().build(is);
+	      }catch(IOException e){
+	         logger.info("session build fail");
+	      }
+	}
 	public static MemberDAOImpl getInstance() {
+		if (instance == null){
+			logger.info("MemberDAOImpl instance is created !!");
+			instance = new MemberDAOImpl();
+		}
 		return instance;
 	}
-
-	private MemberDAOImpl() {
-	/*	try {
-			Class.forName(Constants.ORACLE_DRIVER);
-			con = DriverManager.getConnection(
-					Constants.ORACLE_URL,
-					Constants.USER_ID,
-					Constants.USER_PW);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}*/
+@Override
+	public int insert(MemberVO mem) {
+	SqlSession session = sqlSessionFactory.openSession();
+		return session.insert("",mem);
 	}
 @Override
-	public int insert(MemberBean mem) {
-		int result = 0;	
-		String sql = "insert into member(id,pw,name,reg_date,ssn,email) "
-				+ "values(?,?,?,?,?,?)";
-		try {
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, mem.getId());
-			pstmt.setString(2, mem.getPw());
-			pstmt.setString(3, mem.getName());
-			pstmt.setString(4, mem.getRegDate());
-			pstmt.setString(5, mem.getSsn());
-			pstmt.setString(6, mem.getEmail());
-			result = pstmt.executeUpdate();
-		} catch (Exception e) {
-			
-			e.printStackTrace();
-		}
-		return result;
+	public int update(MemberVO mem) {
+	SqlSession session = sqlSessionFactory.openSession();
+	return session.update("",mem);
 	}
 @Override
-	public void update(MemberBean mem) {
-		String sql = "update member set pw = ?, email = ? where id = ?";
-		try {
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, mem.getPw());
-			pstmt.setString(2, mem.getEmail());
-			pstmt.setString(3, mem.getId());
-			pstmt.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-@Override
-	public void delete(MemberBean mem) {
-		String sql = "delete from member where id = ? and pw = ?";
-		try {
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, mem.getId());
-			pstmt.setString(2, mem.getPw());
-			pstmt.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	
+	public int delete(MemberVO mem) {
+	SqlSession session = sqlSessionFactory.openSession();
+	return session.delete("",mem);
 	}
 
 @Override
 	public List<?> list() {
-		String sql = "select * from member";
-		List<MemberBean> list = new ArrayList<MemberBean>();
-		try {
-			pstmt = con.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				MemberBean t = new MemberBean(rs.getString("ID"), rs.getString("NAME"), rs.getString("PW"),
-						rs.getString("SSN"), rs.getString("EMAIL"), rs.getString("PROFILE_IMG"));
-				t.setRegDate(rs.getString("REG_DATE"));
-				list.add(t);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return list;
+	SqlSession session = sqlSessionFactory.openSession();
+	return session.selectList("");
 	}
 @Override
-	public MemberBean findById(String pk) {
-		String sql = "select * from member where id = ?";
-		MemberBean temp = null;
-		try {
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, pk);
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				temp = new MemberBean(rs.getString("ID"), rs.getString("PW"), rs.getString("NAME"),
-						rs.getString("SSN"), rs.getString("EMAIL"), rs.getString("PROFILE_IMG"));
-				temp.setRegDate(rs.getString("REG_DATE"));
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return temp;
+	public MemberVO findById(String id) {
+	SqlSession session = sqlSessionFactory.openSession();
+	
+	try {
+		return session.selectOne(NAMESPACE +"findById",id);
+	} finally {
+		session.close();
+	}
 	}
 
 @Override	
 	public List<?> findByName(String name) {
-		String sql = "select * from member where name = ?";
-		List<MemberBean> list2 = new ArrayList<MemberBean>();
-		try {
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, name);
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				MemberBean mem = new MemberBean(rs.getString("ID"), rs.getString("NAME"), rs.getString("PW"),
-						rs.getString("SSN"), rs.getString("EMAIL"), rs.getString("PROFILE_IMG"));
-				mem.setRegDate(rs.getString("REG_DATE"));
-				list2.add(mem);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return list2;
+	SqlSession session = sqlSessionFactory.openSession();
+	return session.selectList("",name);
 	}
 @Override
 	public int count() {
-		int count = 0;
-		String sql = "select count(*) as count from member";
-		try {
-			pstmt = con.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				count = rs.getInt("count");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return count;
+	SqlSession session = sqlSessionFactory.openSession();
+	return session.selectOne("");
 	}
 @Override
-	public boolean login(MemberBean param) {
+	public boolean login(MemberVO param) {
 		boolean loginOk= false;
 		if(param.getId()!=null 
 				&& param.getPw()!=null 
 				&& this.existId(param.getId())){
-			MemberBean member = this.findById(param.getId());
+			MemberVO member = this.findById(param.getId());
 			if(member.getPw().equals(param.getPw())){
 				loginOk = true;
 			}
@@ -174,22 +101,8 @@ public class MemberDAOImpl extends SqlSessionDaoSupport implements MemberDAO {
 	}
 @Override	
 	public boolean existId(String id){
-		boolean existOK = false;
-		String sql = "select count(*) as count from member where id = ?";
-		int result = 0;
-		try {
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, id);
-			rs = pstmt.executeQuery();
-			if(rs.next()){
-				result = rs.getInt("count");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		if(result == 1){
-			existOK = true;
-		}
-		return existOK;
+	SqlSession session = sqlSessionFactory.openSession();
+	int temp= session.selectOne("",id);
+	return false;
 	}
 }

@@ -4,9 +4,11 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
+@Service
 public class GradeServiceImpl implements GradeService{
 
-	GradeDAO dao = GradeDAO.getInstance();
+	GradeDAOImpl dao = GradeDAOImpl.getInstance();
 	
 	private static GradeServiceImpl gradeImpl = new GradeServiceImpl();
 	private GradeServiceImpl() {}
@@ -15,7 +17,7 @@ public class GradeServiceImpl implements GradeService{
 	}
 
 	@Override
-	public String GradeCal(GradeBean grade) {
+	public String GradeCal(GradeVO grade) {
 		String gradeRank ="";
 		int sum = grade.getJava() + grade.getSql() + grade.getHtml() + grade.getJavascript();
 		int ave = sum / 4;
@@ -31,7 +33,7 @@ public class GradeServiceImpl implements GradeService{
 	
 	
 	@Override
-	public String insert(GradeBean grade) {
+	public String insert(GradeVO grade) {
 		String insert = "";
 		grade.setGrade(this.GradeCal(grade));
 		if (dao.insert(grade) == 1) {
@@ -43,7 +45,7 @@ public class GradeServiceImpl implements GradeService{
 	}
 
 	@Override
-	public String update(GradeBean grade) {
+	public String update(GradeVO grade) {
 		String update = "";
 		if (dao.update(grade) == 1) {
 			update ="성공";
@@ -76,7 +78,7 @@ public class GradeServiceImpl implements GradeService{
 
 	
 	@Override
-	public GradeBean findBySeq(int seq) {
+	public GradeVO findBySeq(int seq) {
 		return dao.findBySeq(seq);
 	}
 	@Override

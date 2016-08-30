@@ -7,25 +7,33 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
+
+import com.hanbit.web.member.MemberVO;
+
 /**
  * @date  : 2016. 6. 20.
  * @author: 諛곌렐�솉
  * @file  : AccountServiceImpl.java
  * @story : 怨꾩쥖 �씤�꽣�럹�씠�뒪
  */
+@Service
 public class AccountServiceImpl implements AccountService {
-	AccountDAO dao = AccountDAO.getDao();
-	private Map<?,?> map;
-	private static AccountServiceImpl instence = new AccountServiceImpl();
-	public static AccountServiceImpl getInstence() {
-		return instence;
+	private AccountDAOImpl dao;
+	private AccountVO session;
+	private Map<?, ?> map;
+	private static AccountServiceImpl instance;
+	public static AccountServiceImpl getInstance(){
+		return instance;
 	}
 	private AccountServiceImpl() {
-		new HashMap<String,AccountMemberBean>();
+		new HashMap<String,AccountMemberVO>() ;
 	}
 
+
+
 	@Override
-	public String openAccount(AccountBean acc) {
+	public String openAccount(AccountVO acc) {
 		String result = "";
 		acc.setAccountNo((int) (Math.random()*999999)+100000);
 		acc.setMoney(0);
@@ -52,7 +60,7 @@ public class AccountServiceImpl implements AccountService {
 		return result;
 	}
 	@Override
-	public String updateAccount(AccountMemberBean acc) {
+	public String updateAccount(AccountMemberVO acc) {
 		return String.valueOf(dao.updateAccount(acc));
 	}
 	@Override
@@ -72,7 +80,7 @@ public class AccountServiceImpl implements AccountService {
 		return list;
 	}
 	@Override
-	public AccountMemberBean findByAccountNo(int account) {
+	public AccountMemberVO findByAccountNo(int account) {
 		return dao.findByAcc(account);
 	}
 	@Override
@@ -85,7 +93,7 @@ public class AccountServiceImpl implements AccountService {
 	}
 	@Override
 	public Map<?, ?> map() {
-		map = new HashMap<String,AccountMemberBean>();
+		map = new HashMap<String,AccountMemberVO>();
 		map = dao.selectMap();	
 		return map;
 	}

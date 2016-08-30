@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @file : Account.java
  * @story :
  */
-public class AccountBean implements Serializable{
+public class AccountVO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private int accountNo, money; 
 	private String id;
