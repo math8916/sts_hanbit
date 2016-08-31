@@ -21,11 +21,11 @@ var app=(function(){
 			$('#account_mang').attr('src',app.img()+'/account_management.jpg').css('width','300px').css('height','300px').css('alt','logo');
 			$('#admin_content>h3').addClass('text_center');
 			$('#footer').addClass('bottom').addClass('footer');
-			$('#global_content').addClass('box');
-			$('#global_content').addClass('cursor');
-			$('#global_content_a_regist').text(' SIGN IN').click(function() {controller.move('member','regist');});	
-			$('#global_content_a_login').text(' LOG IN').click(function() {controller.move('member','login');});	
-			$('#global_content_a_admin').text(' ADMIN').click(function(){admin.check()});};
+			$('#public_content').addClass('box');
+			$('#public_content').addClass('cursor');
+			$('#public_content_a_regist').text(' SIGN IN').click(function() {controller.move('member','regist');});	
+			$('#public_content_a_login').text(' LOG IN').click(function() {controller.move('member','login');});	
+			$('#public_content_a_admin').text(' ADMIN').click(function(){admin.check()});};
 		var onCreate = function() {
 			setContentView();
 			$('#title').click(function(){controller.home();}) ;
@@ -379,7 +379,7 @@ var session =(function() {
 	
 })();
 
-		var controller = (function() {
+var controller = (function() {
 					var _page,_directory
 					var setPage = function(page) {this._page=page};
 					var setDirectory = function(directory) {this._directory=directory};
@@ -399,14 +399,14 @@ var session =(function() {
 						home : function() {location.href=app.context()+'/'	}
 					};
 				})();
-		var util=(function() {
+var util=(function() {
 			return{
 				isNumber : function(value) {
 					 return typeof value === 'number' && isFinite(value);
 				}
 			};
 		})();	
-		var nav = (function(){
+var nav = (function(){
 			   var init = function(){onCreate();};
 			   var setContentView = function (){
 			     

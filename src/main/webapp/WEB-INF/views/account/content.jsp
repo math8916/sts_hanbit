@@ -14,5 +14,5 @@
 				<li><a id="b_count" 		href="#">통장수</a></li>
 			</ol>      		
 		</div>
-	<a href="${context }/global/main.jsp"><img src="${img }/home.png" alt="home" style="width:30px" /></a>
+	<a href="${context }/public/main.jsp"><img src="${img }/home.png" alt="home" style="width:30px" /></a>
 	</div>

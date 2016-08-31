@@ -3,11 +3,13 @@ package com.hanbit.web.member;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hanbit.web.bank.AccountService;
 import com.hanbit.web.bank.AccountServiceImpl;
+import com.hanbit.web.subject.SubjectDAO;
 import com.hanbit.web.subject.SubjectDAOImpl;
+import com.hanbit.web.subject.SubjectMemberVO;
 
 
 /**
@@ -18,25 +20,22 @@ import com.hanbit.web.subject.SubjectDAOImpl;
  */
 @Service
 public class MemberServiceImpl implements MemberService {
-	
+
 	private MemberDAOImpl dao ;
-	private SubjectDAOImpl subjDao = SubjectDAOImpl.getInstance();
-	private AccountService accService = AccountServiceImpl.getInstance();
-	private MemberVO session;
-	private static MemberServiceImpl instance = new MemberServiceImpl();
-	public static MemberServiceImpl getInstance() {
-		return instance;
-	}
+	private SubjectDAOImpl subjDao ;
+	@Autowired	private MemberVO member;
+	private SubjectDAO sb;
+	@Autowired	private SubjectMemberVO sm;
+	@Autowired	private AccountServiceImpl accService;
+	
 	private MemberServiceImpl() {
 		dao = MemberDAOImpl.getInstance() ;
+		subjDao = SubjectDAOImpl.getInstance();
 	}
 
-
-
-	
 	public void logoutSession(MemberVO member) {
-		if (member.getId().equals(session.getId()) && member.getPw().equals(session.getPw())) {
-			session = null;
+		if (member.getId().equals(member.getId()) && member.getPw().equals(member.getPw())) {
+			member = null;
 		}
 	}
 	
@@ -56,13 +55,13 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void update(MemberVO mem) {
 		dao.update(mem);
-		session = dao.findById(mem.getId());
+		member = dao.findById(mem.getId());
 	}
 
 	@Override
 	public void delete(MemberVO mem) {
 		dao.delete(mem);
-		session = dao.findById(mem.getId());
+		member = dao.findById(mem.getId());
 	}
 	
 	
@@ -92,9 +91,9 @@ public class MemberServiceImpl implements MemberService {
 	public String login(MemberVO member) {
 		String result = "";
 			if (dao.login(member)) {
-				session = dao.findById(member.getId());
-				result = session.getName();
-				accService.map();
+				member = dao.findById(member.getId());
+				result = member.getName();
+				//accService.map();
 			}else{
 				result = "";
 			}
@@ -102,7 +101,7 @@ public class MemberServiceImpl implements MemberService {
 		return result;
 	}
 	public String myAccount() {
-		return session.toString();
+		return member.toString();
 	}
 	@Override
 	public MemberVO getSession() {

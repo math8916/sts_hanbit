@@ -2,7 +2,10 @@ package com.hanbit.web.subject;
 
 import java.io.Serializable;
 
-public class SubjectMemberbean implements Serializable{
+import org.springframework.stereotype.Component;
+
+@Component
+public class SubjectMemberVO implements Serializable{
 	/**
 	 * 
 	 */

@@ -38,3 +38,12 @@
   </li>
   
 </ul>
+<script>
+$(function(){
+	$('#admin_header').css('height','50px');
+	$('.navbar-header').css('height','50px');
+	$('#admin_header #exit').addClass('cursor');
+	$('#admin_header #exit').click(function() {controller.home();});
+	
+});
+</script>

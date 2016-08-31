@@ -12,7 +12,7 @@
 				<li><a href="#" id="a_search">검색</a></li>
 			</ol>
 		</article>
-	<a href="${context }/global.do" ><img src="${img }/home.png" alt="home" id="img_home"/></a>
+	<a href="${context }/public.do" ><img src="${img }/home.png" alt="home" id="img_home"/></a>
 
 </section>
 

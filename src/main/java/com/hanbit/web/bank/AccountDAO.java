@@ -3,6 +3,8 @@ package com.hanbit.web.bank;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Component;
+@Component
 public interface AccountDAO {
 	public int openAccount(AccountVO bean);
 	public int deposit(String accountNo, String money);

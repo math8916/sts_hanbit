@@ -16,7 +16,7 @@
 		<input type="hidden" name="pw" value="<%=service.getSession().getPw()%>">
 		<input type="submit" value="로그아웃"><br/><br/>
 		<a href="${context }/member/main.jsp"><img src="${img }/member.png" alt="member" style="width:30px" /></a>
-	<a href="${context }/global/main.jsp"><img src="${img }/home.png" alt="home" style="width:30px" /></a>
+	<a href="${context }/public/main.jsp"><img src="${img }/home.png" alt="home" style="width:30px" /></a>
 		<%
 	}
 	

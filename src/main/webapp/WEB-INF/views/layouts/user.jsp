@@ -57,9 +57,7 @@
         <tiles:insertAttribute name="header" />
         </div>
       </header>
-        <nav>
-        <tiles:insertAttribute name="menu" />
-        </nav>
+        
         <section>
         <article>
         <tiles:insertAttribute name="body" /> 

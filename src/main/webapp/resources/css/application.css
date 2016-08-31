@@ -17,6 +17,7 @@ footer {	width: 100%;	height: 50px;}
 .float.left{float: center;}
 	/*Compoment */
 .box{margin: 0 auto; width: 600px; text-align: center;}
+.box a{cursor:point;}
 .bottom{position: fixed;bottom: 0;width: 100%;	height: 50px;}
 .footer { background-color:black;color:white; clear:both; text-align:center; padding:5px;}
 

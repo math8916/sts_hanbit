@@ -31,6 +31,27 @@ public class MemberController {
 		
 	}
 	
+	@RequestMapping("/login/execute")
+	public String executeLogin(@RequestParam("id")String id,
+			@RequestParam("password")String password,
+			Model model
+			) {
+	
+			System.out.println("ㅡ검색어 -:"+id);
+			System.out.println(" 옵션 : "+password);		
+		/*MemberVO member= service.login(id);*/
+		logger.info("Welcome MemberController! go login {}", id);
+		logger.info("Welcome MemberController! go login {}", password);
+		MemberVO member = new MemberVO();
+		member.setId(id);
+		member.setPw(password);
+		String sm = service.login(member);
+		model.addAttribute("user",sm);
+		
+
+		return "user:user/content.tiles";
+	}
+	/////  move /////////
 	@RequestMapping ("/main")
 	public String goMain() {
 		logger.info("Welcome MemberController! go Main", "디버깅 모드");
@@ -56,6 +77,7 @@ public class MemberController {
 		logger.info("Welcome MemberController! go delete", "디버깅 모드");
 		return "user:member/delete.tiles";
 	}
+
 	@RequestMapping("/login")
 	public String moveLogin() {
 		logger.info("Welcome MemberController! go login", "디버깅 모드");

@@ -99,10 +99,14 @@ public class MemberDAOImpl implements MemberDAO {
 		}
 		return loginOk;
 	}
-@Override	
+	@Override	
 	public boolean existId(String id){
-	SqlSession session = sqlSessionFactory.openSession();
-	int temp= session.selectOne("",id);
-	return false;
+		boolean flag = false;
+		SqlSession session = sqlSessionFactory.openSession();
+		int result = session.selectOne(NAMESPACE +"existid",id);
+		if(result==1){
+			return true;
+		}
+		return flag;
 	}
 }

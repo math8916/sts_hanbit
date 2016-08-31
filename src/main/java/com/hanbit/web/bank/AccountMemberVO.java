@@ -65,8 +65,10 @@ public class AccountMemberVO {
 	}
 	@Override
 	public String toString() {
-		return "�넻�옣�젙蹂� [ID : " + id + ", �씠由� : " + name + ", �깮�뀈�썡�씪 : " + ssn + ", 怨꾩쥖踰덊샇 : " + accountNo + ", �옍怨� : " + money + "]\n";
+		return "AccountMemberVO [id=" + id + ", pw=" + pw + ", name=" + name + ", regDate=" + regDate + ", gender="
+				+ gender + ", ssn=" + ssn + ", birth=" + birth + ", accountNo=" + accountNo + ", money=" + money + "]";
 	}
+	
 	
 	
 }

@@ -2,7 +2,9 @@ package com.hanbit.web.subject;
 
 import java.io.Serializable;
 
-public class SubjectBean implements Serializable {
+import org.springframework.stereotype.Component;
+@Component
+public class SubjectVO implements Serializable {
 	private static final long serialVersionUID = 1L;
 private String id,major,subject;
 private int subjSeq;

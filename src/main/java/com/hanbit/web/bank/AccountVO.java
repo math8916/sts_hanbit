@@ -5,12 +5,15 @@ package com.hanbit.web.bank;
 
 import java.io.Serializable;
 
+import org.springframework.stereotype.Component;
+
 /**
  * @date : 2016. 6. 16.
  * @author: 諛곌렐�솉
  * @file : Account.java
  * @story :
  */
+@Component
 public class AccountVO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private int accountNo, money; 

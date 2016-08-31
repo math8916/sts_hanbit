@@ -7,12 +7,15 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.springframework.stereotype.Component;
+
 /**
  * @date  : 2016. 6. 16.
  * @author: 배근홍
  * @file  : Student.java
  * @story :
  */
+@Component
 public class MemberVO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String id, pw, name, regDate, gender, ssn, profileImg, email;
