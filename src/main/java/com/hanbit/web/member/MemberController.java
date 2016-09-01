@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
-
+@SessionAttributes({"user","context","js","css","img"})
 @RequestMapping("/member")
 public class MemberController {
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
@@ -19,8 +21,7 @@ public class MemberController {
 			@RequestParam("search_option")String option,
 			@RequestParam("context")String context,
 			Model model){
-		System.out.println("ㅡ검색어 -:"+keyword);
-		System.out.println(" 옵션 : "+option);
+	
 		MemberVO member= service.findById(keyword);
 		logger.info("MemberController   findByID");
 		System.out.println("name" + member.getName());
@@ -31,22 +32,27 @@ public class MemberController {
 		
 	}
 	
-	@RequestMapping("/login/execute")
-	public String executeLogin(@RequestParam("id")String id,
+	@RequestMapping(value="/login" ,method=RequestMethod.POST)
+	public String login(@RequestParam("id")String id,
 			@RequestParam("password")String password,
+			@RequestParam("context")String context,
 			Model model
 			) {
 	
-			System.out.println("ㅡ검색어 -:"+id);
-			System.out.println(" 옵션 : "+password);		
+			
 		/*MemberVO member= service.login(id);*/
-		logger.info("Welcome MemberController! go login {}", id);
-		logger.info("Welcome MemberController! go login {}", password);
+		logger.info("TO LOGIN ID IS {}", id);
+		logger.info("TO LOGIN PASSWORD IS {}", password);
+		logger.info("CONTEXT IS {}", context);
 		MemberVO member = new MemberVO();
 		member.setId(id);
 		member.setPw(password);
 		String sm = service.login(member);
 		model.addAttribute("user",sm);
+		model.addAttribute("context",context);
+		model.addAttribute("js",context+"/resources/js");
+		model.addAttribute("css",context+"/resources/css");
+		model.addAttribute("img",context+"/resources/img");
 		
 
 		return "user:user/content.tiles";
@@ -54,49 +60,53 @@ public class MemberController {
 	/////  move /////////
 	@RequestMapping ("/main")
 	public String goMain() {
-		logger.info("Welcome MemberController! go Main", "디버깅 모드");
+		logger.info("go to {}", "main");
 		return "admin:member/content.tiles";
 	}
 	@RequestMapping("/regist")
 	public String moveRegist() {
-		logger.info("Welcome MemberController regist! go regist", "디버깅 모드");
+		logger.info("Go to regist! {}", "regist");
 		return "public:member/regist.tiles";
 	}
 	@RequestMapping("/find_by_id")
 	public String moveFind_by_id() {
-		logger.info("Welcome MemberController! go detail", "디버깅 모드");
+		logger.info("Go to! {}", "find_by_id");
 		return "user:member/find_by_id.tiles";
 	}
 	@RequestMapping("/update")
 	public String moveUpdate() {
-		logger.info("Welcome MemberController! go update", "디버깅 모드");
+		logger.info("Go to! {}", "update");
 		return "user:member/update.tiles";
 	}
 	@RequestMapping("/delete")
 	public String moveDelete() {
-		logger.info("Welcome MemberController! go delete", "디버깅 모드");
+		logger.info("Go to! go delete", "delete");
 		return "user:member/delete.tiles";
 	}
 
 	@RequestMapping("/login")
 	public String moveLogin() {
-		logger.info("Welcome MemberController! go login", "디버깅 모드");
+		logger.info("Go to!{}", "login");
 		return "public:member/login.tiles";
 	}
 	@RequestMapping("/logout")
 	public String moveLogout() {
+		logger.info("Go to!{}", "logout");
 		return "user:member/logout.tiles";
 	}
 	@RequestMapping("/list")
 	public String moveList() {
+		logger.info("Go to!{}", "list");
 		return "admin:member/list.tiles";
 	}
 	@RequestMapping("/find_by")
 	public String moveFind_by() {
+		logger.info("Go to!{}", "find_by");
 		return "admin:member/find_by.tiles";
 	}
 	@RequestMapping("/count")
 	public String moveCount() {
+		logger.info("Go to!{}", "count");
 		return "admin:member/count.tiles";
 	}
 }

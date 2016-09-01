@@ -103,7 +103,7 @@ public class MemberDAOImpl implements MemberDAO {
 	public boolean existId(String id){
 		boolean flag = false;
 		SqlSession session = sqlSessionFactory.openSession();
-		int result = session.selectOne(NAMESPACE +"existid",id);
+		int result = session.selectOne(NAMESPACE +"existId",id);
 		if(result==1){
 			return true;
 		}

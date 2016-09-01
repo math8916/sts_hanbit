@@ -6,6 +6,7 @@
         <input type="text" name="id"  class="form-control" placeholder="ID" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password"  name="password" class="form-control" placeholder="Password" required>
+        <input type="hidden"  name="context"  >
         <div class="checkbox">
           <label>
             <input type="checkbox" name="remember_me" value="remember-me"> Remember me
@@ -17,9 +18,9 @@
 <script type ="text/javascript">
 	$(function () {
 		
-		$('#member_login_form input[type="submit"]').click(function() {
-					('#member_login_form').submit();})
-		 $('#member_login_form').attr('action',app.context()+'/member/login/execute');
+		 $('#member_login_form').attr('method','post').attr('action',app.context()+'/member/login');
+		 $('#member_login_form input[type="hidden"]').attr('value',app.context());
+		$('#member_login_form input[type="submit"]').click(function() {('#member_login_form').submit();})
 
 	
 	});
