@@ -18,8 +18,7 @@
       	<li><a id="g_regist">등록</a></li>
 		<li><a id="g_update">수정</a></li>
 		<li><a id="g_list">목록 </a></li>
-		<li><a id="g_count">카운트</a></li>
-		<li><a id="g_find">검색 </a></li>
+		
     </ul>
   </li>
   <li role="presentation" class="dropdown">
@@ -27,9 +26,9 @@
       계좌 관리 <span class="caret"></span>
     </a>
     <ul id="account_mgmt" class="dropdown-menu">
-    	<li><a id="list">목록 </a></li>
-		<li><a id="find">조회 </a></li>
-		<li><a id="count">통장수</a></li>
+    	<li><a id="b_list">목록 </a></li>
+		<li><a id="b_search">조회 </a></li>
+		<li><a id="b_count">통장수</a></li>
     </ul>
   </li>
 </ul>

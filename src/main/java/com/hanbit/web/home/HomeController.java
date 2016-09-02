@@ -28,7 +28,15 @@ public class HomeController {
 	   }
 	@RequestMapping("/public/school_info")
 	public String schoolInfo() {
-		return "public/school_info.tiles";
+		return "public:public/school_info.tiles";
+	}
+	@RequestMapping("/public/school_map")
+	public String schoolMap() {
+		return "public:public/school_map.tiles";
+	}
+	@RequestMapping("/public/free_board")
+	public String freeBoard() {
+		return "public:public/free_board.tiles";
 	}
 	
 }

@@ -29,8 +29,3 @@
   </div>
   
 </div>
-<script>
-$(function () {
-	app.img
-});
-</script>

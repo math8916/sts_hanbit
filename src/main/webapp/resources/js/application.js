@@ -64,6 +64,8 @@ var user = (function(){
 	$('#a_list').click(function() {	location.href = controller.move('grade','list')	;});
 	$('#a_count').click(function() {location.href =controller.move('grade','count')	;});
 	$('#a_search').click(function() {location.href =controller.move('grade','search');});
+	$('#logined_header_brand').click(function() {location.href =controller.move('member','content');});
+	
 	};
 	return{
 		init:init,
@@ -82,6 +84,10 @@ var account = (function() {
 	var setContentView = function(){};
 	var onCreate = function() {
 		setContentView();
+		$('#account_list_table .name').click(function() {controller.moveWithKey('member','admin_detail','kim')	});
+		$('#account_list_table .regist').click(function() {controller.moveWithKey('grade','g_regist','kim')	});
+		$('#account_list_table .update').click(function() {controller.moveWithKey('grade','g_update','kim')	});
+
 		/*$('#bt_spec_show').click(member.spec());
 		$('#bt_make_account').click(this.spec());
 		$('#bt_deposit').click(this.deposit());
@@ -324,7 +330,11 @@ var admin= (function () {
 	var getPass= function() {return this._pass;};
 	var setPass= function(pass) {this._pass=pass;};
 	var init = function(){onCreate();};
-	var setContentView = function (){};
+	var setContentView = function (){
+		$('#admin_header').css('height','50px');
+		$('.navbar-header').css('height','50px');
+		$('#admin_header #exit').addClass('cursor');
+	};
 	var onCreate = function(){
 		setContentView();
 		$('#admin_nav #member_mgmt #list').click(function(){controller.move('member','list');});
@@ -340,7 +350,8 @@ var admin= (function () {
 		$('#admin_nav #grade_mgmt #g_list').click(function(){controller.move('grade','g_list');});
 		$('#admin_nav #grade_mgmt #g_count').click(function(){controller.move('grade','g_count');});
 		$('#admin_nav #grade_mgmt #g_search').click(function(){controller.move('grade','g_search');});
-		
+		$('#admin_header #exit').click(function() {controller.home();});
+		$('#admin_header #go_admin_home').click(function() {controller.move('admin','main');});
 	};
 	return {
 init:init,

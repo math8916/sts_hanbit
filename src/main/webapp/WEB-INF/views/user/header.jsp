@@ -3,7 +3,7 @@
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-    <img id="header_brand">
+    <a id="go_user_home"><img id="header_brand"></a>
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
@@ -76,6 +76,7 @@ $(function(){
 	$('#user_header #account li:eq(3) a').click(function () {controller.move('account','b_regist');});
 	$('#user_header #grade li:eq(0) a').click(function () {controller.move('grade','g_detail');});
 	$('#user_header #grade li:eq(1) a').click(function () {controller.move('grade','g_search');});
+	$('#go_user_home').click(function () {controller.move('member','content');});
 
 });
 </script>
