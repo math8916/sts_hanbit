@@ -104,9 +104,38 @@ public class MemberController {
 		logger.info("Go to!{}", "find_by");
 		return "admin:member/find_by.tiles";
 	}
-	@RequestMapping("/count")
-	public String moveCount() {
-		logger.info("Go to!{}", "count");
-		return "admin:member/count.tiles";
+	@RequestMapping("/kaup")
+	public String moveKaup() {
+		logger.info("Go to!{}", "kaup");
+		return "user:user/kaup.tiles";
 	}
+	@RequestMapping("/rock")
+	public String moveRock() {
+		logger.info("Go to!{}", "rock");
+		return "user:user/rock.tiles";
+	}
+	@RequestMapping("/lotto")
+	public String moveLotto() {
+		logger.info("Go to!{}", "lotto");
+		return "user:user/rock.tiles";
+	}
+	@RequestMapping("/content")
+	public String moveContent() {
+		logger.info("Go to!{}", "content");
+		return "user:user/content.tiles";
+	}
+	@RequestMapping("/detail")
+	public String moveDetail() {
+		
+		logger.info("Go to!{}", "detail");
+		return "user:member/detail.tiles";
+	}
+	@RequestMapping("/admin_detail")
+	public String moveA_detail(@RequestParam("key")String key) {
+		
+		logger.info("Go to!{}", "admin_detail");
+		logger.info("key is {}", key);
+		return "admin:member/a_detail.tiles";
+	}
+
 }

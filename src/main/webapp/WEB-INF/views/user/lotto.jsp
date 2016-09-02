@@ -7,14 +7,10 @@
 <section id="formbox">
 <form name="form">
 
-<p> BOM 학습장 </p>
+<p> lotto </p>
 
 </form>
 </section>
 <section id="databox">
 <p>결과 :</p><span id="result"></span>
 </section></div>
-
-<script>
-window.onload=init();
-</script>

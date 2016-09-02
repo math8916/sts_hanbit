@@ -1,19 +1,18 @@
 package com.hanbit.web.grade;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
-import com.hanbit.web.util.Constants;
-import com.hanbit.web.util.Database;
-import com.hanbit.web.util.DatabaseFactory;
-import com.hanbit.web.util.Vendor;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 
+import com.hanbit.web.member.MemberDAOImpl;
 /**
  * @date  : 2016. 7. 1.
  * @author: 배근홍
@@ -28,193 +27,69 @@ import com.hanbit.web.util.Vendor;
 	this.eng = eng;
 	this.math = math;
  * */
-public class GradeDAOImpl {
-		Connection con;
-		Statement stmt;
-		ResultSet rs;
-		PreparedStatement pstmt;
-		private static GradeDAOImpl instance = new GradeDAOImpl();
-		private GradeDAOImpl() {
-			con = DatabaseFactory.createDatabase(Vendor.ORACLE, 
-					Constants.USER_ID, 
-					Constants.USER_PW).getConnection();
+@Repository
+public class GradeDAOImpl implements GradeDAO {
+	 private static final Logger logger = LoggerFactory.getLogger(MemberDAOImpl.class);
+	private SqlSessionFactory sqlSessionFactory;
+	private static final String NAMESPACE = "mapper.grade.";
+	private static GradeDAOImpl instance;
+	private GradeDAOImpl() {
+		try{
+			InputStream is = Resources.getResourceAsStream("config/mybatis-config.xml");
+			sqlSessionFactory = new SqlSessionFactoryBuilder().build(is);
+		}catch(IOException e){
+			logger.info("session build fail");
 		}
-		
-		public static GradeDAOImpl getInstance() {
-			return instance;
-		}
+	}
+	public static GradeDAOImpl getInstance() {
+		if (instance == null) 
+			logger.info("GradeDAOImpl instance is null");
+			instance = new GradeDAOImpl();
+		return instance;
+	}
+	public GradeDAOImpl (SqlSessionFactory sqlSessionFactory){
+		this.sqlSessionFactory = sqlSessionFactory;
+	}
+	@Override
 	public int insert(GradeVO grade) {
-		int result = 0;
-		String sql = "insert into grade(seq, grade, java, sql, html, javascript, id, exam_date)"
-	+ "values(seq.nextval,?,?,?,?,?,?,?)";
-		try {
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, grade.getGrade());
-			pstmt.setInt(2, grade.getJava());
-			pstmt.setInt(3, grade.getSql());
-			pstmt.setInt(4, grade.getHtml());
-			pstmt.setInt(5, grade.getJavascript());
-			pstmt.setString(6, grade.getId());
-			pstmt.setString(7, grade.getExamDate());
-			result = pstmt.executeUpdate();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return result;
+		SqlSession session = sqlSessionFactory.openSession();
+		return session.insert("",grade);
 	}
+	@Override
 	public int update(GradeVO grade){
-		int revise = 0;
-		String sql = "update grade set "+grade.getType()+" = ? where seq = ?";
-		GradeService impl = GradeServiceImpl.getGradeImpl();
-		try {
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, grade.getScore());
-			pstmt.setString(2, grade.getSeq());
-			pstmt.executeUpdate();
-			grade = findBySeq(Integer.parseInt(grade.getSeq()));
-		String sql2 = "update grade set grade = ? where seq = ?";
-			pstmt = con.prepareStatement(sql2);
-			pstmt.setString(1, impl.GradeCal(grade));
-			pstmt.setString(2, grade.getSeq());
-			revise = pstmt.executeUpdate();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return revise;
+		SqlSession session = sqlSessionFactory.openSession();
+		return session.insert("",grade);
 	}
-	
+	@Override
 	public int delete(String delete) {
-		int remove = 0;
-		String sql = "delete from grade where seq = ?";
-		try {
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, delete);
-			remove = pstmt.executeUpdate();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return remove;
+		SqlSession session = sqlSessionFactory.openSession();
+		return session.delete("",delete);
 	}
-	public int exeUpdate(String sql){
-		int result = 0;
-		try {
-			Class.forName(Constants.ORACLE_DRIVER);
-			con = DriverManager.getConnection(Constants.ORACLE_URL, 
-										Constants.USER_ID, 
-										Constants.USER_PW);
-			stmt = con.createStatement();
-			result = stmt.executeUpdate(sql);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if (result == 0) {
-			System.out.println("성공");
-		} else {
-			System.out.println("실패");
-		}
-		return result;
-	}
+	@Override
 	public List<?> list() {
-		List<GradeVO> list = new ArrayList<GradeVO>();
-		String sql = "select * from grade";
-		try {
-			pstmt = con.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			while(rs.next()){
-				GradeVO bean = new GradeVO();
-				bean.setSeq(String.valueOf(rs.getInt("SEQ")));
-				bean.setId(rs.getString("ID"));
-				bean.setExamDate(rs.getString("EXAM_DATE"));
-				bean.setGrade(rs.getString("GRADE"));
-				bean.setJava(rs.getInt("JAVA"));
-				bean.setHtml(rs.getInt("HTML"));
-				bean.setJavascript(rs.getInt("JAVASCRIPT"));
-				bean.setSql(rs.getInt("SQL"));
-				list.add(bean);
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return list;
+		SqlSession session = sqlSessionFactory.openSession();
+		return session.selectList("");
 	}
-	
+	@Override
 	public GradeVO findBySeq(int seq) {
-		GradeVO temp = null;
-		String sql = "select * from grade where seq = ? ";
-		try {
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, seq);
-			rs = pstmt.executeQuery();
-				if (rs.next()) {
-					GradeVO bean = new GradeVO();
-					bean.setSeq(String.valueOf(rs.getInt("SEQ")));
-					bean.setId(rs.getString("ID"));
-					bean.setExamDate(rs.getString("EXAM_DATE"));
-					bean.setGrade(rs.getString("GRADE"));
-					bean.setJava(rs.getInt("JAVA"));
-					bean.setHtml(rs.getInt("HTML"));
-					bean.setJavascript(rs.getInt("JAVASCRIPT"));
-					bean.setSql(rs.getInt("SQL"));
-					temp = bean;
-				}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		SqlSession session = sqlSessionFactory.openSession();
+		try{
+		return session.selectOne(NAMESPACE + "findBySeq",seq);
+		}finally{
+			session.close();
 		}
-		return temp;
-	}
 	
+		
+	}
+	@Override
 	public List<?> findByID(String id) {
-		List<GradeVO> list = new ArrayList<GradeVO>();
-		String sql = "select * from grade where id = ?";
-		try {
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, id);
-			rs = pstmt.executeQuery();
-			while(rs.next()){
-				GradeVO bean = new GradeVO();
-				bean.setSeq(String.valueOf(rs.getInt("SEQ")));
-				bean.setId(rs.getString("ID"));
-				bean.setExamDate(rs.getString("EXAM_DATE"));
-				bean.setGrade(rs.getString("GRADE"));
-				bean.setJava(rs.getInt("JAVA"));
-				bean.setHtml(rs.getInt("HTML"));
-				bean.setJavascript(rs.getInt("JAVASCRIPT"));
-				bean.setSql(rs.getInt("SQL"));
-				list.add(bean);
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return list;
+		SqlSession session = sqlSessionFactory.openSession();
+		return session.selectOne("",id);
 	}
-	
-	public int count(String findByDate){
-	int count = 0;
-	String sql = "select count(*) as count from grade where EXAM_DATE= ? ";
-	try {
-		pstmt = con.prepareStatement(sql);
-		pstmt.setString(1, findByDate);
-		rs = pstmt.executeQuery();
-		if (rs.next()) {
-			count = rs.getInt("COUNT");
-		}
-	} catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	return count;
-	
-	}
-
+	@Override
 	public int count() {
-		// TODO Auto-generated method stub
-		return 0;
+	SqlSession session = sqlSessionFactory.openSession();
+	return session.selectOne("");
 	}
+	
 }

@@ -334,6 +334,12 @@ var admin= (function () {
 		$('#admin_nav #account_mgmt #b_list').click(function(){controller.move('account','b_list');});
 		$('#admin_nav #account_mgmt #b_search').click(function(){controller.move('account','b_search');});
 		$('#admin_nav #account_mgmt #b_count').click(function(){controller.move('account','b_count');});
+		$('#admin_nav #grade_mgmt #g_regist').click(function(){controller.move('grade','g_regist');});
+		$('#admin_nav #grade_mgmt #g_update').click(function(){controller.move('grade','g_update');});
+		$('#admin_nav #grade_mgmt #g_delete').click(function(){controller.move('grade','g_delete');});
+		$('#admin_nav #grade_mgmt #g_list').click(function(){controller.move('grade','g_list');});
+		$('#admin_nav #grade_mgmt #g_count').click(function(){controller.move('grade','g_count');});
+		$('#admin_nav #grade_mgmt #g_search').click(function(){controller.move('grade','g_search');});
 		
 	};
 	return {
@@ -383,18 +389,29 @@ var controller = (function() {
 					var _page,_directory
 					var setPage = function(page) {this._page=page};
 					var setDirectory = function(directory) {this._directory=directory};
+					var setKey = function(key){this._key=key};
 					var getPage = function() {return this._page;};
 					var getDirectory = function() {return this._directory;};
+					var getKey = function(){return this._key};
+					
 					return{
 						setPage : setPage,
 						setDirectory:setDirectory,
 						getPage:getPage,
 						getDirectory:getDirectory,
-						move : function(directory,page) {
+						setKey : setKey,
+						getKey : getKey,
+						moveWithKey : function(directory,page,key){
+							setDirectory(directory);
+							setPage(page);
+							setKey(key);
+							location.href = app.context()+'/'+getDirectory()+'/'+getPage()+'?key='+getKey();
+						},
+						move : function(directory,page,key) {
 							setDirectory(directory);
 							setPage(page);
 							location.href=
-								app.context()+'/'+getDirectory()+'/'+getPage();
+								app.context()+'/'+getDirectory()+'/'+getPage()+'?key='+getKey();
 						},
 						home : function() {location.href=app.context()+'/'	}
 					};

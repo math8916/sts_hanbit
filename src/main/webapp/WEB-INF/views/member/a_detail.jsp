@@ -1,13 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<link rel="stylesheet" href="${css}/public.css" />
-<link rel="stylesheet" href="${css}/member.css" />
+
 <div class="box">
 		<h1>회원상세정보</h1>
 		<table id="member_detail">
 				<tr>
 				<td rowspan="5" style="width:30%">
-				<img src="${img}/choi1.jpg" alt="며느리" width="104"
-			height="142"> </td>
+				<img src="${img}/choi1.jpg" alt="며느리" width="104" height="142"> </td>
 				<td style="width:20%" class="font_bold bg_color_yellow">ID</td>
 				<td style="width:40%">${member.id}</td>
 			</tr>

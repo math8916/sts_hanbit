@@ -18,6 +18,3 @@
 <p>결과 :</p><span id="result"></span>
 </section></div>
 
-<script>
-window.onload=kaup_init();
-</script>

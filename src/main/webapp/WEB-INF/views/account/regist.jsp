@@ -2,7 +2,8 @@
 <div class="box">
 	<form class="navbar-form navbar-left" role="search">
 		<div class="form-group">
-		<div class="col-lg-6">
+		<div class="col-lg-12">
+		 <h2>계좌 개설 및 해지</h2></br></br></br>
 		<select style='width:100px;height:30px'>
   			<option value="regist">개설</option>
   			<option value="delete">해지</option>

@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -12,38 +13,43 @@ public class GradeController {
 	private static final Logger logger = LoggerFactory.getLogger(GradeController.class);
 	@RequestMapping("/main")
 	public String goMain() {
-		logger.info("Welcome gradeController! go Main", "디버깅 모드");
+		logger.info(" go Main", "디버깅 모드");
 		return "admin:grade/content.tiles";
 	}
-	@RequestMapping("/regist")
-	public String moveRegist(){
-		logger.info("Welcome gradeController! go regist", "디버깅 모드");
-		return "grade/regist.tiles";
+	@RequestMapping("/g_regist")
+	public String moveRegist(@RequestParam("key")String key){
+		logger.info(" go to {}", "g_regist");
+		logger.info(" key is {}", key);
+		return "admin:grade/regist.tiles";
 	}
-	
-	@RequestMapping("/update")
+	@RequestMapping("/g_detail")
+	public String moveDetail(){
+		logger.info(" go to {}", "g_detail");
+		return "user:grade/detail.tiles";
+	}
+	@RequestMapping("/g_update")
 	public String moveupdate(){
-		logger.info("Welcome gradeController! go update", "디버깅 모드");
-		return "grade/update.tiles";
+		logger.info("go to {}", "g_update");
+		return "admin:grade/update.tiles";
 	}
-	@RequestMapping("/delete")
+	@RequestMapping("/g_delete")
 	public String movedelete(){
-		logger.info("Welcome gradeController! go delete", "디버깅 모드");
-		return "grade/delete.tiles";
+		logger.info(" go delete {}", "g_delete");
+		return "admin:grade/delete.tiles";
 	}
-	@RequestMapping("/list")
+	@RequestMapping("/g_list")
 	public String movelist(){
-		logger.info("Welcome gradeController! go list", "디버깅 모드");
-		return "grade/list.tiles";
+		logger.info(" go list {}", "g_list");
+		return "admin:grade/list.tiles";
 	}
-	@RequestMapping("/search")
+	@RequestMapping("/g_search")
 	public String movesearch(){
-		logger.info("Welcome gradeController! go search", "디버깅 모드");
-		return "grade/search.tiles";
+		logger.info(" go search {}", "g_search");
+		return "user:grade/search.tiles";
 	}
-	@RequestMapping("/count")
+	@RequestMapping("/g_count")
 	public String movecount(){
-		logger.info("Welcome gradeController! go count", "디버깅 모드");
-		return "grade/count.tiles";
+		logger.info(" go count {}", "g_count");
+		return "user:grade/count.tiles";
 	}
 }

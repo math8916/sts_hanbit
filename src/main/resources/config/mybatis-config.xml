@@ -17,6 +17,7 @@
   <mappers>
     <mapper resource="mapper/member.xml"/>
     <mapper resource="mapper/account.xml"/>
+    <mapper resource="mapper/grade.xml"/>
   
   </mappers>
 </configuration>

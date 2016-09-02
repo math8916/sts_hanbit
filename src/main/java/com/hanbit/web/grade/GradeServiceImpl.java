@@ -85,14 +85,16 @@ public class GradeServiceImpl implements GradeService{
 	public int count() {
 		return dao.count();
 	}
-	@Override
-	public int count(String findByCount) {
-		return dao.count(findByCount);
-	}
+	
 	@Override
 	public Map<?, ?> map() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	@Override
+	public int count(String findByCount) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

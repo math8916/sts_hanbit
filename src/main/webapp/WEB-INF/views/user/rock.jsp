@@ -7,7 +7,7 @@
 <section id="formbox">
 <form name="form">
 
-<p> dom </p>
+<p> 가위바위보 </p>
 
 </form>
 </section>
@@ -15,6 +15,3 @@
 <p>결과 :</p><span id="result"></span>
 </section></div>
 
-<script>
-window.onload=init();
-</script>
