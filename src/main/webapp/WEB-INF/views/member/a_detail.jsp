@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
 <div class="box">
 		<h1>회원상세정보</h1>
 		<table id="member_detail">
@@ -13,26 +12,21 @@
 				<td class="font_bold bg_color_yellow">이 름</td>
 				<td>${member.name}</td>
 			</tr>
-			
 			<tr>
-				
 				<td class="font_bold bg_color_yellow">성 별</td>
 				<td>남</td>
 			</tr>
 			<tr>
-				
 				<td class="font_bold bg_color_yellow">이메일</td>
 				<td>${member.email}</td>
 			</tr>
 			<tr>
-				
 				<td class="font_bold bg_color_yellow">전공과목</td>
 				<td>test</td>
 			</tr>
 			<tr>
 				<td class="font_bold bg_color_yellow">수강과목</td>
 				<td colspan="2">test</td>
-				
 			</tr>
 			<tr>
 				<td class="font_bold bg_color_yellow">생년월일</td>
@@ -41,13 +35,9 @@
 			<tr>
 				<td class="font_bold bg_color_yellow">등록일</td>
 				<td colspan="2">${member.regDate}</td>
-				
 			</tr>
 		</table>
-		
 		<br /> 
 		<p>
-			
 		</p>
-		
 	</div>

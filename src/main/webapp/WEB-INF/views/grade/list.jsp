@@ -3,18 +3,6 @@
 <div class="panel panel-default">
   <div class="panel-heading">학생 목록</div>
  <table id="grade_list" class="table">
-
-<style>
-table {font-family: arial, sans-serif;border-collapse: collapse;width: 100%;}
-td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-}
-tr:nth-child(even) {
-    background-color: #dddddd;
-}
-</style>
 <div class="box" style='padding-top:0;width:90%' >
 <ul class="list-group">
   <li class="list-group-item">홍 길 동</li>
@@ -73,10 +61,4 @@ tr:nth-child(even) {
 </nav>
 </div>
    </div>
-   <script type="text/javascript">
-   $(function () {
-	$('#grade_list_table .name').click(function() {controller.moveWithKey('member','admin_detail','kim')	});
-	$('#grade_list_table .regist').click(function() {controller.moveWithKey('grade','g_regist','kim')	});
-	$('#grade_list_table .update').click(function() {controller.moveWithKey('grade','g_update','kim')	});
-});
-   </script>
+ 

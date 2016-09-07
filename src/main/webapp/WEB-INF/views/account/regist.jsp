@@ -9,7 +9,6 @@
   			<option value="delete">해지</option>
 		</select>
      	<input type="text" class="form-control" placeholder="개설하려면 비밀번호 / 해지시에는 계좌번호"/>
-    	
 		<button type="submit" class="btn btn-primary">실행</button>
 	  	</div>
 	  	</div>

@@ -82,14 +82,8 @@ body {font-family: Verdana,sans-serif;}
     .weekdays li, .days li {width: 12.2%;}
 }
 </style>
-
-	
-
 </head>
 <body>
-
-
-
 <div class="month">
   <ul>
     <li class="prev">❮</li>
@@ -100,7 +94,6 @@ body {font-family: Verdana,sans-serif;}
     </li>
   </ul>
 </div>
-
 <ul class="weekdays">
   <li>Mo</li>
   <li>Tu</li>

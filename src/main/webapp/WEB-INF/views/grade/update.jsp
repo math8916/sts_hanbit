@@ -30,16 +30,3 @@
    </form>
 </section>
 
-<script type="text/javascript">
-$(function() {
-   $('#grade_grade').addClass('box').css('padding-top','0');
-   $('#grade_grade #bt_send').addClass('btn').addClass(' btn-primary');
-   $('#grade_grade #bt_cancel').addClass('btn').addClass(' btn-danger');
-   $('#grade_grade_form').addClass('form-horizontal');
-   $('#grade_grade_form > div').addClass('form-group').addClass('form-group-lg');
-   $('#grade_grade_form > div > label').addClass('col-sm-2').addClass('control-label');
-   $('#grade_grade_form > div > div').addClass('col-sm-10');
-   $('#grade_grade_form > div > div > input').addClass('form-control');
-   $('#grade_grade #rd_major > label:gt(1)').addClass('radio-inline');
-});
-</script>

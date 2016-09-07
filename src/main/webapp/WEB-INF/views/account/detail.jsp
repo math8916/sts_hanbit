@@ -3,7 +3,6 @@
 
 <div class="box table">
 	<h1>회원상세정보</h1>
-
 	<table id="subject_detail" class="table">
 				<tr>
 				<td rowspan="4" style="width:30%">

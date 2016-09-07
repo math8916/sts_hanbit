@@ -29,6 +29,3 @@ SSN <input type="text" id="ssn" name="ssn" value=""/>
 </section>
 </div>
 
-<script >
-account.init();
-</script>

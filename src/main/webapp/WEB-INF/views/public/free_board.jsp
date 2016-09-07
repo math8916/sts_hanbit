@@ -3,20 +3,7 @@
 <div class="panel panel-default">
   <div class="panel-heading">free board</div>
  <table id="free_board_list" class="table">
-
-<style>
-table {font-family: arial, sans-serif;border-collapse: collapse;width: 100%;}
-td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-}
-tr:nth-child(even) {
-    background-color: #dddddd;
-}
-</style>
-<div class="box" style='padding-top:0;width:90%' >
-
+<div class="box" style='padding-top:0;width:100%' >
       <div class="panel panel-primary">
   <div class="panel-heading">free board</div>
 <table id="free_board_list_table">
@@ -70,10 +57,3 @@ tr:nth-child(even) {
 </nav>
 </div>
    </div>
-   <script type="text/javascript">
-   $(function () {
-	$('#free_board_list_table .name').click(function() {controller.moveWithKey('member','admin_detail','kim')	});
-	$('#free_board_list_table .regist').click(function() {controller.moveWithKey('grade','g_regist','kim')	});
-	$('#free_board_list_table .update').click(function() {controller.moveWithKey('grade','g_update','kim')	});
-});
-   </script>

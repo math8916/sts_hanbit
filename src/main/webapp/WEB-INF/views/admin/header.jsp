@@ -10,9 +10,7 @@
         <span class="icon-bar"></span>
       </button>
     </div>
-    
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      
       <ul class="nav navbar-nav navbar-right">
       <li style='margin-top:14px;margin-right:50px;font-weight: bold;'><span aria-hidden="true"></span>관리자 화면</li>
         <li><a id="exit"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>나가기</a></li>

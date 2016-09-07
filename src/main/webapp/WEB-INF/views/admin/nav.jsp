@@ -18,7 +18,6 @@
       	<li><a id="g_regist">등록</a></li>
 		<li><a id="g_update">수정</a></li>
 		<li><a id="g_list">목록 </a></li>
-		
     </ul>
   </li>
   <li role="presentation" class="dropdown">
@@ -32,10 +31,3 @@
     </ul>
   </li>
 </ul>
-<script type="text/javascript">
-$(function(){
-	$('#admin_nav').css('height','50px');
-	$('#g_regist').click(function () {alert("등록으로 이동 합니다");controller.move('member','list')});
-	$('#g_update').click(function () {alert("등록으로 이동 합니다");controller.move('member','list')});
-});
-</script>

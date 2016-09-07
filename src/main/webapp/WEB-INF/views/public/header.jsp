@@ -17,12 +17,3 @@
    </div>
    <!-- /.navbar-collapse -->
 </nav>
- <script type="text/javascript">
-   $(function () {
-	$('#school_info').click(function() {controller.move('public','school_info')	});
-	$('#school_map').click(function() {controller.move('public','school_map')	});
-	$('#slider').click(function() {controller.move('public','slider')	});
-	$('#free_board').click(function() {controller.move('public','free_board')	});
-	$('#go_public_home').click(function() {controller.home()});
-});
-   </script>

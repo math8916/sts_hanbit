@@ -3,18 +3,6 @@
 <div class="panel panel-default">
   <div class="panel-heading">학생 목록</div>
  <table id="account_list" class="table">
-
-<style>
-#account_list_table {font-family: arial, sans-serif;border-collapse: collapse;width: 100%;}
-#account_list_table td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-}
-#account_list_table tr:nth-child(even) {
-    background-color: #dddddd;
-}
-</style>
 <div class="box" style='padding-top:0;width:90%' >
 <ul class="list-group">
   <li class="list-group-item">홍 길 동</li>
@@ -28,21 +16,18 @@
        <th>이 름</th>
        <th>생년월일</th>
        <th>잔액</th>
-      
   </tr>
      <tr>
     <td>123-456-789</td>
     <td><a class="name" >홍길동</a></td>
     <td>2016년1월1일</td>
     <td>￦1,000,000,000</td>
-    
   </tr>
      <tr>
     <td>123-456-789</td>
     <td><a class="name" >김길동</a></td>
     <td>2016년1월1일</td>
     <td>￦1,000,000,000</td>
-    
   </tr>
      <tr>
     <td>123-456-789</td>
@@ -56,7 +41,6 @@
     <td><a class="name" >배길동</a></td>
     <td>2016년1월1일</td>
     <td>￦1,000,000,000</td>
-    
   </tr>
 </table>
 <nav aria-label="Page navigation">
@@ -80,6 +64,3 @@
 </nav>
 </div>
    </div>
-   <script type="text/javascript">
-
-   </script>

@@ -1,6 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-
 <div style="text-align: center">
 	<%-- <%
 	MemberService service = MemberServiceImpl.getInstanceImpl();
@@ -19,7 +17,6 @@
 	<a href="${context }/public/main.jsp"><img src="${img }/home.png" alt="home" style="width:30px" /></a>
 		<%
 	}
-	
 	%> --%>
 	</form>
 	</div>

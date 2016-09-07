@@ -1,6 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-
 <section id ="member_content">
 		<h1></h1>
 		 <article >
@@ -15,9 +13,5 @@
 				<li><a id="find_by" ></a></li>
 				<li><a id="count" 	></a></li>
 			</ol>
-			
 	</article>
-	<a id="member_content_a_home" alt="home" herf="#">
-		<img id="member_content_img_home" alt="home"  /></a>
-
 </section>

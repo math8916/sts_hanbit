@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"     pageEncoding="UTF-8"%>
 <section id="grade_regist">
    <form id="grade_regist_form">
-  
      <table id="subject_detail" class="table">
 				<tr>
 				<td rowspan="4" style="width:30%">
@@ -43,8 +42,6 @@
        <label for="ex1">HTML</label>
        <div><input type="text" id="id" name="id" placeholder="점수입력"></div>
      </div>
-
-  
       <input type="hidden" name="action" value="regist" />
       <input type="hidden" name="page" value="login" />
       <input id="bt_send" type="submit" value="전 송"/>
@@ -52,16 +49,3 @@
    </form>
 </section>
 
-<script type="text/javascript">
-$(function() {
-   $('#grade_regist').addClass('box');
-   $('#grade_regist #bt_join').addClass('btn').addClass(' btn-primary');
-   $('#grade_regist #bt_cancel').addClass('btn').addClass(' btn-danger');
-   $('#grade_regist_form').addClass('form-horizontal');
-   $('#grade_regist_form > div').addClass('form-group').addClass('form-group-lg');
-   $('#grade_regist_form > div > label').addClass('col-sm-2').addClass('control-label');
-   $('#grade_regist_form > div > div').addClass('col-sm-10');
-   $('#grade_regist_form > div > div > input').addClass('form-control');
-   $('#grade_regist #rd_major > label:gt(1)').addClass('radio-inline');
-});
-</script>
