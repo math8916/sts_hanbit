@@ -5,7 +5,7 @@
         <label for="inputEmail" class="sr-only">Email address</label>
         <input type="text" name="id"  class="form-control" placeholder="ID" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password"  name="password" class="form-control" placeholder="Password" required>
+        <input type="password"  name="pw" class="form-control" placeholder="Password" required>
         <input type="hidden"  name="context"  >
         <div class="checkbox">
           <label>

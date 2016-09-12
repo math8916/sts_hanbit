@@ -14,7 +14,7 @@ public class JDBCTest {
 		Statement stmt = null;
 		ResultSet rs = null;
 		String sql = "select name from member "
-				+ "where id = 'kim'",result="";
+				+ "where mem_id = 'hong'",result="";
 		
 		List<String> list = new ArrayList<String>();
 		try {
@@ -34,7 +34,8 @@ public class JDBCTest {
 			e.printStackTrace();
 		} 
 		// System.out.println(list);
-		System.out.println("결과"+result);
+
+		System.out.println("결과 :"+result);
 		
 	}
 }

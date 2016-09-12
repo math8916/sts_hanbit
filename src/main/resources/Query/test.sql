@@ -1,5 +1,5 @@
 select * from tab;
-select * from major;
+select * from member;
 =======CREATE=======
 DROP SEQUENCE grade_seq;
 DROP SEQUENCE art_seq;
