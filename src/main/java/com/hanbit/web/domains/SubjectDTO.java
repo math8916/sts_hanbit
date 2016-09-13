@@ -3,34 +3,19 @@ package com.hanbit.web.domains;
 import java.io.Serializable;
 
 import org.springframework.stereotype.Component;
+
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 @Component
+@Data
 public class SubjectDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
-private String id,major,subject;
-private int subjSeq;
-public String getId() {
-	return id;
-}
-public void setId(String id) {
-	this.id = id;
-}
-public String getMajor() {
-	return major;
-}
-public void setMajor(String major) {
-	this.major = major;
-}
-public String getSubject() {
-	return subject;
-}
-public void setSubject(String subject) {
-	this.subject = subject;
-}
-public int getSubjSeq() {
-	return subjSeq;
-}
-public void setSubjSeq(int subjSeq) {
-	this.subjSeq = subjSeq;
-}
+
+	@Getter @Setter private String category;	
+	@Getter @Setter private String title;
+	@Getter @Setter private String regDate;
+	@Getter @Setter private String content;
+	@Getter @Setter int artSeq;
 
 }

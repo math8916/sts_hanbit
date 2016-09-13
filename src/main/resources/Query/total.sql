@@ -151,43 +151,43 @@ BEGIN
  END insertExam;
  
 CREATE OR REPLACE VIEW Major_View AS SELECT 
-m.major_seq 	AS major_seq,
-m.title 		AS major_title,
-u.mem_id		AS mem_id,		
+m.major_seq 	AS majorSeq,
+m.title 		AS majorTitle,
+u.mem_id		AS id,		
 u.pw            AS pw,         
 u.name          AS name,       
-u.reg_date      AS reg_date,   
+u.reg_date      AS regDate,   
 u.ssn           AS ssn,      
 u.gender        AS gender,     
 u.role          AS role,       
 u.email         AS email,      
 u.phone         AS phone,      
-u.profile_img   AS profile_img
+u.profile_img   AS profileImg
 FROM Major m, Member u WHERE m.major_seq = u.major_seq;
 CREATE OR REPLACE VIEW Grade_View AS SELECT
-   u.mem_id AS mem_id,
+   u.mem_id AS id,
    u.pw AS pw,
    u.name AS name,
    u.gender AS gender,
-   u.reg_date AS reg_date,
+   u.reg_date AS regDate,
    u.ssn AS ssn,
    u.email AS email,
-   u.profile_img AS profile_img,
+   u.profile_img AS profileImg,
    u.role AS role,
    u.phone AS phone,
-   g.grade_seq AS grade_seq,
+   g.grade_seq AS gradeSeq,
    g.grade AS grade,
    g.term AS term,
-   s.subj_seq AS subj_seq,
-   s.subj_name AS subj_name,
-   x.exam_seq AS exam_seq,
+   s.subj_seq AS subjSeq,
+   s.subj_name AS subjName,
+   x.exam_seq AS examSeq,
    x.score AS score
 FROM Member u, Grade g, Subject s, Exam x WHERE u.mem_id = g.mem_id AND u.mem_id = s.mem_id AND u.mem_id = x.mem_id;
 CREATE OR REPLACE  VIEW Board_View AS SELECT
-b.art_seq       AS art_seq,  
+b.art_seq       AS artSeq,  
 b.category      AS category, 
 b.title         AS title,    
-b.reg_date      AS write_reg_date, 
+b.reg_date      AS writeRegDate, 
 b.content       AS content,  
 u.mem_id 		AS mem_id,
 u.pw            AS pw,         
@@ -198,7 +198,7 @@ u.gender        AS gender,
 u.role          AS role,       
 u.email         AS email,      
 u.phone         AS phone,      
-u.profile_img   AS profile_img
+u.profile_img   AS profileImg
 FROM Member u, Board b WHERE u.mem_id = b.mem_id;
 
 
