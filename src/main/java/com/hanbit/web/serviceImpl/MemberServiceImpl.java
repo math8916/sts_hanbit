@@ -29,8 +29,7 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired	private SqlSession sqlSession;
 	@Autowired	private MemberDTO member;
 	
-	private MemberServiceImpl() {
-	}
+
 
 	public void logoutSession(MemberDTO member) {
 		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
