@@ -2,6 +2,6 @@ package com.hanbit.web.handler;
 
 import java.util.List;
 
-public interface ListService {
+@FunctionalInterface public interface ListService {
 	List<?> list();
 }

@@ -44,7 +44,24 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="${css}/application.css" />
-
+<link rel="apple-touch-icon" sizes="57x57" href="${img}/favicons/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="${img}/favicons/apple-touch-icon-60x60.png">
+<link rel="icon" type="image/png" href="${img}/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="${img}/favicons/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="${img}/favicons/manifest.json">
+<link rel="shortcut icon" href="${img}/favicons/favicon.ico">
+<link rel="stylesheet" type="text/css" href="${css}/normalize.css">
+<link rel="stylesheet" type="text/css" href="${css}/owl.css">
+<link rel="stylesheet" type="text/css" href="${css}/animate.css">
+<link rel="stylesheet" type="text/css" href="${font}/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="${font}/et-icons.css">
+<!-- Main style -->
+<link rel="stylesheet" type="text/css" href="${css}/cardio.css">
+<script src="${js}/owl.carousel.min.js"></script>
+<script src="${js}/wow.min.js"></script>
+<script src="${js}/typewriter.js"></script>
+<script src="${js}/jquery.onepagenav.js"></script>
+<script src="${js}/main.js"></script>
 </head>
 
  <head>
@@ -53,17 +70,17 @@
  </head>
   <body>
         <header>
-        <div >
+        <div id="pub_header">
         <tiles:insertAttribute name="header" />
         </div>
       </header>
        
         <section>
-        <article>
+        <article id="pub_article">
         <tiles:insertAttribute name="body" /> 
         </article>  
         </section>
-        <footer>
+        <footer id="pub_footer">
        <tiles:insertAttribute name="footer" /> 
         </footer>
   </body>

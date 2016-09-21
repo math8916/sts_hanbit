@@ -1,20 +1,21 @@
 select * from tab;
 select * from major;
+select * from member;
 =======CREATE=======
 DROP SEQUENCE grade_seq;
-DROP SEQUENCE art_seq;
-DROP SEQUENCE subj_seq;
-DROP SEQUENCE major_seq;
-DROP SEQUENCE exam_seq;
 CREATE SEQUENCE grade_seq START with 1000 increment by 1 nocache nocycle;
+DROP SEQUENCE art_seq;
 CREATE SEQUENCE art_seq START with 1000 increment by 1 nocache nocycle;
+DROP SEQUENCE subj_seq;
 CREATE SEQUENCE subj_seq START with 1000 increment by 1 nocache nocycle;
+DROP SEQUENCE major_seq;
 CREATE SEQUENCE major_seq START with 1000 increment by 1 nocache nocycle;
+DROP SEQUENCE exam_seq;
 CREATE SEQUENCE exam_seq START with 1000 increment by 1 nocache nocycle;
 DROP TABLE major CASCADE CONSTRAINT;
 CREATE TABLE major(
 	major_seq INT CONSTRAINT major_pk PRIMARY KEY,
-	title VARCHAR2(20) NOT NULL
+	title VARCHAR2(20) NOT NULL UNIQUE
 );
 DROP TABLE Member CASCADE CONSTRAINT;
 CREATE TABLE Member (
@@ -23,11 +24,11 @@ CREATE TABLE Member (
    name VARCHAR2(20) NOT NULL,
    gender VARCHAR2(10) NOT NULL,
    reg_date VARCHAR2(20) NOT NULL,
-   ssn VARCHAR2(10) NOT NULL,
+   ssn VARCHAR2(10) NOT NULL UNIQUE,
    email VARCHAR2(30),
    profile_img VARCHAR2(100) DEFAULT 'default.jpg',
    role VARCHAR2(10) DEFAULT 'STUDENT',
-   phone VARCHAR2(13) NOT NULL,
+   phone VARCHAR2(13) NOT NULL UNIQUE,
    major_seq INT,
    CONSTRAINT gender_ck CHECK (gender IN ('MALE','FEMALE')),
    CONSTRAINT major_member_fk FOREIGN KEY (major_seq) REFERENCES Major(major_seq) ON DELETE CASCADE
@@ -44,19 +45,18 @@ CREATE TABLE grade(
 DROP TABLE board CASCADE CONSTRAINT;
 CREATE TABLE board(
 	art_seq INT CONSTRAINT board_pk PRIMARY KEY,
-	category VARCHAR2(20) NOT NULL,
+	category VARCHAR2(20) NOT NULL UNIQUE,
 	title VARCHAR2(20) DEFAULT 'No_title',
 	reg_date VARCHAR2(20) NOT NULL,
 	content VARCHAR2(50) DEFAULT 'No',
 	mem_id VARCHAR2(20),
     CONSTRAINT member_board_fk FOREIGN KEY (mem_id)
    REFERENCES member(mem_id) on delete cascade
-	
 );
 DROP TABLE subject CASCADE CONSTRAINT;
 CREATE TABLE subject(
 	subj_seq INT CONSTRAINT subject_pk PRIMARY KEY,
-	subj_name VARCHAR2(20) NOT NULL,
+	subj_name VARCHAR2(20) NOT NULL UNIQUE,
 	mem_id VARCHAR2(20) NOT NULL,
     CONSTRAINT member_subject_fk FOREIGN KEY (mem_id) REFERENCES member(mem_id) on delete cascade
 );

@@ -10,10 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hanbit.web.controllers.MemberController;
+import com.hanbit.web.domains.Command;
 import com.hanbit.web.domains.MemberDTO;
-import com.hanbit.web.domains.SubjectDTO;
 import com.hanbit.web.mappers.MemberMapper;
-import com.hanbit.web.mappers.SubjectMapper;
 import com.hanbit.web.services.MemberService;
 
 
@@ -28,7 +27,7 @@ public class MemberServiceImpl implements MemberService {
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	@Autowired	private SqlSession sqlSession;
 	@Autowired	private MemberDTO member;
-	
+	@Autowired  private Command command ;
 
 
 	public void logoutSession(MemberDTO member) {
@@ -88,10 +87,10 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberDTO findById(String id) {
+	public MemberDTO findOne(Command command) {
 		// TODO Auto-generated method stub
 		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
-		return findById(id);
+		return mapper.findOne(command);
 	}
 
 
@@ -100,7 +99,9 @@ public class MemberServiceImpl implements MemberService {
 	public MemberDTO login(MemberDTO member) {
 		logger.info("MemberService login ID = {}",member.getId());
 		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
-		MemberDTO mem =mapper.findById(member.getId());
+		command.setKeyword(member.getId());
+		command.setOption("mem_id");
+		MemberDTO mem =mapper.findOne(command);
 		if(member.getPw().equals(mem.getPw())) {
 			logger.info("MemberService login {}"," SUCCESS ");
 			return mem;
@@ -108,5 +109,22 @@ public class MemberServiceImpl implements MemberService {
 		logger.info("MemberService login {}"," FAIL ");
 		mem.setId("NONE");
 		return mem;
+	}
+
+
+
+	@Override
+	public MemberDTO findById(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public int existId(String id) {
+		logger.info("MemberService existId ID = {}",id);
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		return mapper.existId(id);
 	}
 }

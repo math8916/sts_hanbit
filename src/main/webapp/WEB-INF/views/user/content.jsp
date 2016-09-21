@@ -1,17 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<link rel="apple-touch-icon" sizes="57x57" href="${img}/favicons/apple-touch-icon-57x57.png">
-<link rel="apple-touch-icon" sizes="60x60" href="${img}/favicons/apple-touch-icon-60x60.png">
-<link rel="icon" type="image/png" href="${img}/favicons/favicon-32x32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="${img}/favicons/favicon-16x16.png" sizes="16x16">
-<link rel="manifest" href="${img}/favicons/manifest.json">
-<link rel="shortcut icon" href="${img}/favicons/favicon.ico">
-<link rel="stylesheet" type="text/css" href="${css}/normalize.css">
-<link rel="stylesheet" type="text/css" href="${css}/owl.css">
-<link rel="stylesheet" type="text/css" href="${css}/animate.css">
-<link rel="stylesheet" type="text/css" href="${font}/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="${font}/et-icons.css">
-<!-- Main style -->
-<link rel="stylesheet" type="text/css" href="${css}/cardio.css">
+
 	<section id="user_content_service" class="box section-padded">
 		<div>
 			<div class="row text-center title">
@@ -112,9 +100,5 @@
 		</div>
 	</section>
 	
-<script src="${js}/owl.carousel.min.js"></script>
-<script src="${js}/wow.min.js"></script>
-<script src="${js}/typewriter.js"></script>
-<script src="${js}/jquery.onepagenav.js"></script>
-<script src="${js}/main.js"></script>
+
 

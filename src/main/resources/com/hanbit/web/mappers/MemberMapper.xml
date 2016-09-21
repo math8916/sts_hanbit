@@ -7,7 +7,7 @@
 	select * from member
 	</select> -->
 	
-	<select id="findById" parameterType="string" resultType="com.hanbit.web.domains.MemberDTO">
+	<select id="findOne" parameterType="com.hanbit.web.domains.Command" resultType="com.hanbit.web.domains.MemberDTO">
 	select 
     	mem_id as id,
     	pw as pw,
@@ -19,16 +19,16 @@
     	role as role,
     	ssn as ssn,
     	phone as phone
-    	 from member where mem_id = #{pk}
+    	 from member where ${option} = #{keyword}
 		</select>
-	<!-- <select id="findByName" parameterType="string" resultType="com.hanbit.web.domains.MemberDTO">
+	<select id="findByName" parameterType="string" resultType="com.hanbit.web.domains.MemberDTO">
 	select * from member where name = #{name}
 		</select>
 	<select id="count"  resultType="int">
 	select count(*) as count from member
 		</select>
 	
-	<select id="existId" parameterType="string" resultType="int">
+	<select id="existId" parameterType="com.hanbit.web.domains.MemberDTO" resultType="int">
 		select count(*) as count from member where mem_id = #{id}
 	</select>
 	
@@ -41,7 +41,7 @@
 	update member set pw = #{pw}, email = #{email} where id = #{id}
 	</update>
 	
-	<delete id="delete" parameterType="com.hanbit.web.domains.MemberDTO"></delete> -->
+	<delete id="delete" parameterType="com.hanbit.web.domains.MemberDTO"></delete>
   
   
 </mapper>
