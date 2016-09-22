@@ -114,6 +114,12 @@ var util=(function() {
 			return{
 				isNumber : function(value) {
 					 return typeof value === 'number' && isFinite(value);
+				},
+				pwChecker : function(value) {
+					var pw_regex=/^.*(?=.{4,10})(?=.*[a-zA-Z0-9]).*$/;
+					return pw_regex.test(value)?"yes":"no";
+							
+							
 				}
 			};
 		})();	
@@ -153,6 +159,98 @@ var major = (function(){})();
 @DESC :학생
 =============== Student ===============
 */
+var STUDENT_MAIN=
+	'<section id="user_content_service" class="box section-padded">'
+	+'<div><div class="row text-center title"><h2>Services</h2> '
+	+'<h4 class="light muted">Achieve the best results with our wide variety of training options!</h4> '
+	+'</div><div  class="row services"><div id="kaup" class="col-md-4"><div class="service"> '
+	+'<div class="icon-holder">  '
+	+'<img src="'+app.img()+'/icons/kaup.png" alt="" class="icon"> '
+	+'</div>'
+	+'<h4 class="heading">KAUP</h4> '
+	+'<p class="description">A elementum ligula lacus ac quam ultrices a scelerisque praesent vel suspendisse scelerisque a aenean hac montes.</p>'
+	+'</div> '
+	+'</div>  '
+	+'<div id="rock" class="col-md-4"> '
+	+'<div class="service">  '
+	+'<div class="icon-holder">   '
+	+'<img src="'+app.img()+'/icons/rsp.png" alt="" class="icon"> '
+	+'</div> '
+	+'<h4 class="heading">MIX ROCK</h4>  '
+	+'<p class="description">A elementum ligula lacus ac quam ultrices a scelerisque praesent vel suspendisse scelerisque a aenean hac montes.</p>'
+	+'</div> '
+	+'</div>  '
+	+'<div id="lotto" class="col-md-4">         '
+	+'<div class="service"> '
+	+'<div class="icon-holder">   '
+	+'<img src="'+app.img()+'/icons/lotto.png" alt="" class="icon">  '
+	+'</div>  '
+	+'<h4 class="heading">LOTTO DRAWING</h4> '
+	+'<p class="description">A elementum ligula lacus ac quam ultrices a scelerisque praesent vel suspendisse scelerisque a aenean hac montes.</p>'
+	+'</div> '
+	+'</div>   '
+	+'</div>  '
+	+'</div> '
+	+'<div class="cut cut-bottom"></div> '
+	+'</section>     '
+	+'<section id="user_content_subject" class="section gray-bg">  '
+	+'<div class="container">  '
+	+'<div class="row title text-center">     '
+	+'<h2 class="margin-top">MAJOR SUBJECT</h2>   '
+	+'<h4 class="light muted">TOP3</h4>    '
+	+'</div>    '
+	+'<div class="row">   '
+	+'<div class="col-md-4">  '
+	+'<div id ="major_subject_1" class="team text-center" value="java">  '
+	+'<div class="cover" style="background:url('+app.img()+'/team/team-cover1.jpg"); background-size:cover;">'
+	+'<div class="overlay text-center">     '
+	+'<h3 class="white">수업료</h3>  '
+	+'<h5 class="light light-white">1 - 5 sessions / month</h5>  '
+	+'</div>    '
+	+'</div>   '
+	+'<img src='+app.img()+'/team/team3.jpg alt="Team Image" class="avatar">  '
+	+'<div class="title">    '
+	+'<h4>JAVA</h4>    '
+	+'<h5 class="muted regular">Server programming </h5>   '
+	+'</div>    '
+	+'<input type="hidden" name="major_subject_1" value="java">   '
+	+'<input  type="button" data-toggle="modal" data-target="#modal1" class="btn btn-blue-fill" value="과목정보"/>  '
+	+'</div>      '
+	+'</div>    '
+	+'<div class="col-md-4">   '
+	+'<div id ="major_subject_2" class="team text-center">      '
+	+'<div class="cover" style="background:url('+app.img()+'/team/team-cover2.jpg"); background-size:cover;">'
+	+'<div class="overlay text-center">    '
+	+'<h3 class="white">$수업료.00</h3>    '
+	+'<h5 class="light light-white">1 - 5 sessions / month</h5>    '
+	+'</div>      '
+	+'</div>    '
+	+'<img src='+app.img()+'/team/team1.jpg alt="Team Image" class="avatar">    '
+	+'<div class="title">                             '
+	+'<h4>Javascript</h4>               '
+	+'<h5 class="muted regular">Server programming</h5>        '
+	+'</div>                               '
+	+'<input type="hidden" name="major_subject_2">          '
+	+'<input  type="button" data-toggle="modal" data-target="#modal1" class="btn btn-blue-fill" value="과목정보"/>  '
+	+'</div>                         '
+	+'</div>                         '
+	+'<div class="col-md-4">            '
+	+'<div id ="major_subject_3" class="team text-center">           '
+	+'<div class="cover" style="background:url('+app.img()+'/team/team-cover3.jpg); background-size:cover;">       '
+	+'<div class="overlay text-center">            '
+	+'<h3 class="white">수업료</h3>              '
+	+'<h5 class="light light-white">1 - 5 sessions / month</h5>     '
+	+'</div>        '
+	+'</div>        '
+	+'<img src='+app.img()+'/team/team2.jpg alt="Team Image" class="avatar">     '
+	+'<div class="title">  '
+	+'<h4>SQL</h4>            '
+	+'<h5 class="muted regular">Data </h5>   '
+	+'</div>           '
+	+'<input type="hidden" name="major_subject_3">           '
+	+'<input type="button" data-toggle="modal" data-target="#modal1" class="btn btn-blue-fill" value="과목정보"/>    '
+	+'</div></div></div></div>'
+	+'</section>'   
 var user = (function(){
 	var init = function() {
 		$('#member_content_img_home').attr('src',app.img()+'/home.png');
@@ -272,6 +370,47 @@ check : function() {
 @DESC :학생
 =======================================
 */
+var LOGIN_FORM=
+	'<section class="box">'
+	+'<form id = "member_login_form" class="form-signin">'
+	+'<h2 class="form-signin-heading">Please sign in</h2>'
+	+'<label for="inputEmail" class="sr-only">Email address</label>'
+	+'<input type="text" id="id" name="id"  class="form-control" placeholder="ID" required autofocus>'
+	+' <label for="inputPassword" class="sr-only">Password</label>'
+	+'<input type="password" id="pw" name="pw" class="form-control" placeholder="Password" required>'
+	+' <input type="hidden" name="context"  >'
+	+' <div class="checkbox">'
+	+' <label> <input type="checkbox" name="remember_me" value="remember-me"> Remember me</label>'
+	+'</div><input id="login_btn" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</input>'
+	+'</form></section>'
+var SIGN_UP_FORM =
+		'<section class="box"><form id="member_regist_form" >'
+		+'<div ><label for="inputEmail3" class="col-sm-2 control-label">이름</label><div><input type="input_name"  id="inputEmail3"placeholder="Name"></div></div>'
+		+'<div ><label for="inputEmail3" class="col-sm-2 control-label">ID</label><div id="id_box"><input type="text"  id="id" placeholder="ID"><input type="button" id="check_dup" value="중복체크"/></div></div>'
+		+'<div ><label for="inputEmail3" class="col-sm-2 control-label">Password</label><div><input type="password"  name="password" id="password" placeholder="8자리이상 입력해주세요"></div></div>'
+		+'<div ><label for="inputEmail3" class="col-sm-2 control-label">Password 확인</label><div><input type="password" name="chpass"  id="chpass" placeholder="8자리이상 입력해주세요"></div></div>'
+		+'<div>  <font name="check" size="2" color="red"></font> </div>'
+		+'<div ><label for="inputEmail3" class="col-sm-2 control-label">SSN</label><div><input type="input_name"  id="inputEmail3"placeholder="123456-1"></div></div>'
+		+'<div ><label for="inputEmail3" class="col-sm-2 control-label">E-mail</label><div><input type="input_name"  id="inputEmail3"placeholder="email@mail.com"></div></div>'
+		+'<div ><label for="inputEmail3" class="col-sm-2 control-label">Phone</label>'
+		+'<div><input type="input_name"  id="inputEmail3"placeholder="010-1234-1234"></div></br>'
+		+'<div id="rd_major">'
+		+'<label for="inputEmail3" class="col-sm-2 control-label">전 공</label>'
+		+'<label ><input type="radio"  name="major" value="computer">컴공학부</label>'
+		+'<label ><input type="radio"  name="major" value="mgmt"> 경영학부</label>'
+		+'<label ><input type="radio"  name="major" value="math"> 수학부</label>'
+		+'<label ><input type="radio"  name="major" value="eng"> 영문학부</label></div>'
+		+'<div ><label for="inputEmail3" class="col-sm-2 control-label">수강 과목</label>'
+		+'<div class="ck_subject">'
+       	+'<label ><input type="radio" name="subject" value="java"> 자바</label>'
+		+'<label ><input type="radio" name="subject" value="sql"> SQL</label>'
+		+'<label ><input type="radio" name="subject" value="cpp"> C++</label>'
+		+'<label ><input type="radio" name="subject" value="python"> 파이썬</label>'
+		+'<label ><input type="radio" name="subject" value="delphi"> 델파이</label>'
+		+'<label ><input type="radio" name="subject" value="html"> HTML<br/>'
+		+'</label></div></div></div>'
+		+'<input id="bt_join" type="submit" value="회원가입" />'
+		 +' <input id="bt_cancel" type="reset" value="취소" /></form></section>'
 var member = (function() {
 	var _name,_ssn,_gender,_age;
 	var setAge=function(age){this.age=age;}
@@ -340,6 +479,7 @@ var member = (function() {
 		$('#member_login_form input[type="submit"]').click(function() {('#member_login_form').submit();})
 
 	};
+
 	return{
 		setSsn : setSsn,
 		setName : setName,
@@ -351,19 +491,8 @@ var member = (function() {
 		getGender : getGender,
 		init : init,
 		pub_login_form:function(){
-			var view='<section class="box">'
-				+'<form id = "member_login_form" class="form-signin">'
-				+'<h2 class="form-signin-heading">Please sign in</h2>'
-				+'<label for="inputEmail" class="sr-only">Email address</label>'
-				+'<input type="text" id="id" name="id"  class="form-control" placeholder="ID" required autofocus>'
-				+' <label for="inputPassword" class="sr-only">Password</label>'
-				+'<input type="password" id="pw" name="pw" class="form-control" placeholder="Password" required>'
-				+' <input type="hidden" name="context"  >'
-				+' <div class="checkbox">'
-				+' <label> <input type="checkbox" name="remember_me" value="remember-me"> Remember me</label>'
-				+'</div><input id="login_btn" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</input>'
-				+'</form></section>'
-				$('#pub_article').html(view);
+			
+				$('#pub_article').html(LOGIN_FORM);
 				$('#login_btn').click(function(e){
 					e.preventDefault();
 					
@@ -377,99 +506,9 @@ var member = (function() {
 						alert('아이디나 비번이 일치 하지 않습니다.');
 						}else{
 							/*alert('welcome .' +data.name);*/
-							var view='<section id="user_content_service" class="box section-padded">'
-								+'<div><div class="row text-center title"><h2>Services</h2> '
-								+'<h4 class="light muted">Achieve the best results with our wide variety of training options!</h4> '
-								+'</div><div  class="row services"><div id="kaup" class="col-md-4"><div class="service"> '
-								+'<div class="icon-holder">  '
-								+'<img src="'+app.img()+'/icons/kaup.png" alt="" class="icon"> '
-								+'</div>'
-								+'<h4 class="heading">KAUP</h4> '
-								+'<p class="description">A elementum ligula lacus ac quam ultrices a scelerisque praesent vel suspendisse scelerisque a aenean hac montes.</p>'
-								+'</div> '
-								+'</div>  '
-								+'<div id="rock" class="col-md-4"> '
-								+'<div class="service">  '
-								+'<div class="icon-holder">   '
-								+'<img src="'+app.img()+'/icons/rsp.png" alt="" class="icon"> '
-								+'</div> '
-								+'<h4 class="heading">MIX ROCK</h4>  '
-								+'<p class="description">A elementum ligula lacus ac quam ultrices a scelerisque praesent vel suspendisse scelerisque a aenean hac montes.</p>'
-								+'</div> '
-								+'</div>  '
-								+'<div id="lotto" class="col-md-4">         '
-								+'<div class="service"> '
-								+'<div class="icon-holder">   '
-								+'<img src="'+app.img()+'/icons/lotto.png" alt="" class="icon">  '
-								+'</div>  '
-								+'<h4 class="heading">LOTTO DRAWING</h4> '
-								+'<p class="description">A elementum ligula lacus ac quam ultrices a scelerisque praesent vel suspendisse scelerisque a aenean hac montes.</p>'
-								+'</div> '
-								+'</div>   '
-								+'</div>  '
-								+'</div> '
-								+'<div class="cut cut-bottom"></div> '
-								+'</section>     '
-								+'<section id="user_content_subject" class="section gray-bg">  '
-								+'<div class="container">  '
-								+'<div class="row title text-center">     '
-								+'<h2 class="margin-top">MAJOR SUBJECT</h2>   '
-								+'<h4 class="light muted">TOP3</h4>    '
-								+'</div>    '
-								+'<div class="row">   '
-								+'<div class="col-md-4">  '
-								+'<div id ="major_subject_1" class="team text-center" value="java">  '
-								+'<div class="cover" style="background:url('+app.img()+'/team/team-cover1.jpg"); background-size:cover;">'
-								+'<div class="overlay text-center">     '
-								+'<h3 class="white">수업료</h3>  '
-								+'<h5 class="light light-white">1 - 5 sessions / month</h5>  '
-								+'</div>    '
-								+'</div>   '
-								+'<img src='+app.img()+'/team/team3.jpg alt="Team Image" class="avatar">  '
-								+'<div class="title">    '
-								+'<h4>JAVA</h4>    '
-								+'<h5 class="muted regular">Server programming </h5>   '
-								+'</div>    '
-								+'<input type="hidden" name="major_subject_1" value="java">   '
-								+'<input  type="button" data-toggle="modal" data-target="#modal1" class="btn btn-blue-fill" value="과목정보"/>  '
-								+'</div>      '
-								+'</div>    '
-								+'<div class="col-md-4">   '
-								+'<div id ="major_subject_2" class="team text-center">      '
-								+'<div class="cover" style="background:url('+app.img()+'/team/team-cover2.jpg"); background-size:cover;">'
-								+'<div class="overlay text-center">    '
-								+'<h3 class="white">$수업료.00</h3>    '
-								+'<h5 class="light light-white">1 - 5 sessions / month</h5>    '
-								+'</div>      '
-								+'</div>    '
-								+'<img src='+app.img()+'/team/team1.jpg alt="Team Image" class="avatar">    '
-								+'<div class="title">                             '
-								+'<h4>Javascript</h4>               '
-								+'<h5 class="muted regular">Server programming</h5>        '
-								+'</div>                               '
-								+'<input type="hidden" name="major_subject_2">          '
-								+'<input  type="button" data-toggle="modal" data-target="#modal1" class="btn btn-blue-fill" value="과목정보"/>  '
-								+'</div>                         '
-								+'</div>                         '
-								+'<div class="col-md-4">            '
-								+'<div id ="major_subject_3" class="team text-center">           '
-								+'<div class="cover" style="background:url('+app.img()+'/team/team-cover3.jpg); background-size:cover;">       '
-								+'<div class="overlay text-center">            '
-								+'<h3 class="white">수업료</h3>              '
-								+'<h5 class="light light-white">1 - 5 sessions / month</h5>     '
-								+'</div>        '
-								+'</div>        '
-								+'<img src='+app.img()+'/team/team2.jpg alt="Team Image" class="avatar">     '
-								+'<div class="title">  '
-								+'<h4>SQL</h4>            '
-								+'<h5 class="muted regular">Data </h5>   '
-								+'</div>           '
-								+'<input type="hidden" name="major_subject_3">           '
-								+'<input type="button" data-toggle="modal" data-target="#modal1" class="btn btn-blue-fill" value="과목정보"/>    '
-								+'</div></div></div></div>'
-								+'</section>'                                                                                                                                             
+							                                                                                                                                          
 							$('#pub_header').empty().load(app.context()+'/member/logined/header');                                                                                                                
-							$('#pub_article').html(view);
+							$('#pub_article').html(STUDENT_MAIN);
 							$('#logout').on('click',function(){location.href = app.context()+'/member/logout';});
 						}                                                                                                                                                    
 					},
@@ -480,49 +519,55 @@ var member = (function() {
 			});
 		},
 		pub_signin_form:function(){
-			var view ='<form id="member_regist_form" >'
-				+'<div ><label for="inputEmail3" class="col-sm-2 control-label">이름</label><div><input type="input_name"  id="inputEmail3"placeholder="Name"></div></div>'
-				+'<div ><label for="inputEmail3" class="col-sm-2 control-label">ID</label><div id="id_box"><input type="text"  id="id" placeholder="ID"><input type="button" id="check_dup" value="중복체크"/></div></div>'
-				+'<div ><label for="inputEmail3" class="col-sm-2 control-label">Password</label><div><input type="input_name"  id="inputEmail3"placeholder="PASSWOD"></div></div>'
-				+'<div ><label for="inputEmail3" class="col-sm-2 control-label">SSN</label><div><input type="input_name"  id="inputEmail3"placeholder="123456-1"></div></div>'
-				+'<div ><label for="inputEmail3" class="col-sm-2 control-label">E-mail</label><div><input type="input_name"  id="inputEmail3"placeholder="email@mail.com"></div></div>'
-				+'<div ><label for="inputEmail3" class="col-sm-2 control-label">Phone</label>'
-				+'<div><input type="input_name"  id="inputEmail3"placeholder="010-1234-1234"></div></br>'
-				+'<div id="rd_major">'
-				+'<label for="inputEmail3" class="col-sm-2 control-label">전 공</label>'
-				+'<label ><input type="radio"  name="major" value="computer">컴공학부</label>'
-				+'<label ><input type="radio"  name="major" value="mgmt"> 경영학부</label>'
-				+'<label ><input type="radio"  name="major" value="math"> 수학부</label>'
-				+'<label ><input type="radio"  name="major" value="eng"> 영문학부</label></div>'
-				+'<div ><label for="inputEmail3" class="col-sm-2 control-label">수강 과목</label>'
-				+'<div class="ck_subject">'
-		       	+'<label ><input type="radio" name="subject" value="java"> 자바</label>'
-				+'<label ><input type="radio" name="subject" value="sql"> SQL</label>'
-				+'<label ><input type="radio" name="subject" value="cpp"> C++</label>'
-				+'<label ><input type="radio" name="subject" value="python"> 파이썬</label>'
-				+'<label ><input type="radio" name="subject" value="delphi"> 델파이</label>'
-				+'<label ><input type="radio" name="subject" value="html"> HTML<br/>'
-				+'</label></div></div></div>'
-				+'<input id="bt_join" type="submit" value="회원가입" />'
-				 +' <input id="bt_cancel" type="reset" value="취소" /></form></section>'
-				 $('#pub_article').empty().append(view);
+			
+				$('#pub_article').empty().append(SIGN_UP_FORM);
 					member.init();
-				$('#check_dup').click(function(){
-					$.ajax({
-						url:app.context()+'/member/check_dup/'+$('#id').val(),
-						success:function(data){
-						if(data.flag==="TRUE"){
-							$('#id_box').html('<input type="text"  id="id" placeholder="'+data.message+'"><input type="button" id="check_dup" value="다시조회"/>');
-							member.init();
-						}else{
-							$('#id_box').html('<input type="text"  id="id" placeholder="'+data.message+'"><input type="button" id="check_dup" value="그대로 사용"/>');
-							member.init();
-						}
-						},
-						error:function(xhr,status,msg){
-							alert('회원 중복 실패 :'+ msg)
-						}
+				$(function(){
+						 $('#password').keyup(function(){
+						  $('font[name=check]').text('');
+						  });
+					$('#chpass').keyup(function(){
+						if($('#chpass').val().length > 8){
+						   if($('#password').val()!=$('#chpass').val()){
+						    $('font[name=check]').text('');
+						    $('font[name=check]').html("암호틀림");
+						   }else{
+						    $('font[name=check]').text('');
+						    $('font[name=check]').html("암호맞음");
+						   }
+						  }
 					});
+					 });
+				$('#check_dup').click(function(){
+					var $val=$(this).val();
+					if (util.pwChecker($('#id').val())==='yes') {
+						$.ajax({
+							url:app.context()+'/member/check_dup/'+$('#id').val(),
+							success:function(data){
+							if(data.flag==="TRUE"){
+								$('#id_box').html('<input type="text"  id="id" placeholder="'+data.message+'"><input type="button" id="re_check_dup" name="re_check_dup" value="다시조회"/>');
+								member.init();
+							}else{
+								$('#id_box').html('<input type="text"  id="id" placeholder="'+data.message+'"><input type="button" id="use_input_id" name="use_input_id" value="그대로 사용"/>');
+								member.init();
+								$('#use_input_id').click(function(){alert('그대로 사용');});
+								var use_id =data.temp;
+								var password =$('#password').val();
+								$('#bt_join').click(function(){	});
+								
+							}
+							},
+							error:function(xhr,status,msg){
+								alert('회원 중복 실패 :'+ msg)
+							}
+						});
+						
+					} else {
+						alert("정규식에 안 맞음");
+						$('#id').val('').focus();
+						
+					}
+					
 				});
 		}
 	};	

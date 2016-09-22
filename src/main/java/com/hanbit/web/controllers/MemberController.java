@@ -100,6 +100,7 @@ public class MemberController {
 		} else {
 			retval.setFlag("NO");
 			retval.setMessage("사용 가능한 아이디 입니다.");
+			retval.setTemp(id);
 			logger.info("Go to 중복체크 값! {}", retval.getFlag());
 			logger.info("Go to 중복체크 값! {}", retval.getMessage());
 		}
