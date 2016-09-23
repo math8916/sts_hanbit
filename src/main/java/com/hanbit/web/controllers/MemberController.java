@@ -98,6 +98,17 @@ public class MemberController {
 		logger.info("SIGN UP REVAL = {}",retval.getMessage());
 		return retval;
 	}
+	@RequestMapping(value="/update",method=RequestMethod.POST,
+			consumes="application/JSON")
+	public @ResponseBody Retval moveUpdate(@RequestBody MemberDTO param) {
+		logger.info("Go to! {}", "update");
+		logger.info("SIGN UP PW = {}",param.getPw());
+		logger.info("SIGN UP EMAIL = {}",param.getEmail());
+		logger.info("SIGN UP SSN = {}",param.getMajor());
+		logger.info("SIGN UP PHONE = {}",param.getSubject());
+		retval.setMessage("success");
+		return retval;
+	}
 	@RequestMapping("/check_dup/{id}")
 	public @ResponseBody Retval CheckDup(@PathVariable String id) {
 		logger.info("Go to 중복체크! {}", "EXECUTE");
@@ -124,16 +135,8 @@ public class MemberController {
 		logger.info("Go to! {}", "find_by_id");
 		return "user:member/find_by_id.tiles";
 	}
-	@RequestMapping("/update")
-	public String moveUpdate() {
-		logger.info("Go to! {}", "update");
-		return "user:member/update.tiles";
-	}
-	@RequestMapping("/delete")
-	public String moveDelete() {
-		logger.info("Go to! go delete", "delete");
-		return "user:member/delete.tiles";
-	}
+	
+	
 
 	
 	@RequestMapping("/logout")
@@ -176,7 +179,13 @@ public class MemberController {
 	@RequestMapping("/detail")
 	   public @ResponseBody MemberDTO moveDetail(HttpSession session) {
 	      logger.info("GO TO {}","detail");
-	      return (MemberDTO) session.getAttribute("user");}
+	      return (MemberDTO) session.getAttribute("user");
+	 }
+	@RequestMapping("/delete")
+	public @ResponseBody MemberDTO moveDelete(HttpSession session) {
+		logger.info("Go to! go delete", "delete");
+		return (MemberDTO) session.getAttribute("user");
+	}
 	@RequestMapping("/admin_detail")
 	public String moveA_detail(@RequestParam("key")String key) {
 		

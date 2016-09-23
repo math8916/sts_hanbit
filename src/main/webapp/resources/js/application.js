@@ -416,10 +416,14 @@ var DETAIL_FORM=
 	+'<h1>회원상세정보</h1>'
 	+'<table id="member_detail">'
 	+'<tr>'
-	+'<td rowspan="5" style="width:30%">'
+	+'<td rowspan="7" style="width:30%">'
 	+'<img id="img" src="'+app.img()+'/" alt="며느리" width="104" height="142"> </td>'
 	+'<td style="width:20%" class="font_bold bg_color_yellow">ID</td>'
 	+'<td id="id" style="width:40%"></td>'
+	+'</tr>'
+	+'<tr>'
+	+'<td class="font_bold bg_color_yellow">비밀번호</td>'
+	+'<td id="u_pw"></td>'
 	+'</tr>'
 	+'<tr>'
 	+'<td class="font_bold bg_color_yellow">이 름</td>'
@@ -453,50 +457,16 @@ var DETAIL_FORM=
 	+'<br />'
 	+'<p>'
 	+'</p>'
-	+'</div><input type="button" value="내정보 보기" id="test"/>';
-var UPDATE_FORM=
-	+'<div class="box">'
-	+'<h1>회원상세정보</h1>'
-	+'<table id="member_detail">'
-	+'<tr>'
-	+'<td rowspan="5" style="width:30%">'
-	+'<img src="${img}/choi1.jpg" alt="며느리" width="104"'
-	+'height="142"> </td>'
-	+'<td style="width:20%" class="font_bold bg_color_yellow">ID</td>'
-	+'<td style="width:40%">${member.id}</td>'
-	+'</tr>'
-	+'<tr>'
-	+'<td class="font_bold bg_color_yellow">이 름</td>'
-	+'<td>${member.name}</td>'
-	+'</tr>'
-	+'<tr>'
-	+'<td class="font_bold bg_color_yellow">성 별</td>'
-	+'<td>남</td>'
-	+'</tr>'
-	+'<tr>'
-	+'<td class="font_bold bg_color_yellow">이메일</td>'
-	+'<td>${member.email}</td>'
-	+'</tr>'
-	+'<tr>'
-	+'<td class="font_bold bg_color_yellow">전공과목</td>'
-	+'<td>test</td>'
-	+'</tr>'
-	+'<tr>'
-	+'<td class="font_bold bg_color_yellow">수강과목</td>'
-	+'<td colspan="2">test</td>'
-	+'</tr>'
-	+'<tr>'
-	+'<td class="font_bold bg_color_yellow">생년월일</td>'
-	+'<td colspan="2">900101</td>'
-	+'</tr>'
-	+'<tr>'
-	+'<td class="font_bold bg_color_yellow">등록일</td>'
-	+'<td colspan="2">${member.regDate}</td>'
-	+'</tr>'
-	+'</table>'
-	+'<br />'
-	+'<p>'
-	+'</p>'
+	+'<div id="bt_box"><input id="go_update" type="button" value ="내정보 수정 " /><input id="unregist" type="button" value ="회원탈퇴 " /></div></div>';
+var UNREGIST_FORM=
+	'<div class="box">'
+	+'<h3>탈퇴하시려면 비밀번호를 다시 입력해 주세요</h3>'
+	+'<form id="member_delete_form" class="navbar-form navbar-left" role="search">'
+	+'<div class="form-group">'
+	+'<input id="u_pw" type="text" class="form-control" placeholder="PASSWORD">'
+	+'</div>'
+	+'<button id="unregist_bt" type="submit" class="btn btn-default" value="탈 퇴">Submit</button>'
+	+'</form>'
 	+'</div>';
 var member = (function() {
 	var _name,_ssn,_gender,_age;
@@ -696,32 +666,76 @@ var member = (function() {
 		detail : function(){
 			$('#pub_header').empty().load(app.context()+'/member/logined/header');
 			$('#pub_article').html(DETAIL_FORM);
-			$('#test').click(function(){
-				alert('데이타 성공에 :');
-				
-				$.ajax({
-					url:app.context()+'/member/detail',
-					type:'get',
-					dataType:'json',
-					success:function(data){
-						
-						$('#member_detail #img').attr('src',app.img()+'/'+data.profileImg)
-						$('#member_detail #id').text(data.id)
-						$('#member_detail #name').text(data.name)
-						$('#member_detail #gender').text(data.gender)
-						$('#member_detail #email').text(data.email)
-						$('#member_detail #major').text('test')
-						$('#member_detail #subject').text('test')
-						$('#member_detail #regdate').text(data.regDate)
-						$('#member_detail #birth').text(data.ssn)
-					},
-					error:function(x,s,m){
-						alert('데이타 가져오기 실패 :'+ m);
-					}
+				$.getJSON(app.context()+'/member/detail',function(data){
+						$('#member_detail #img').attr('src',app.img()+'/'+data.profileImg);
+						$('#member_detail #id').text(data.id);
+						$('#member_detail #pw').text(data.pw).hide();
+						$('#member_detail #name').text(data.name);
+						$('#member_detail #gender').text(data.gender);
+						$('#member_detail #email').text(data.email);
+						$('#member_detail #major').text('test');
+						$('#member_detail #subject').text('test');
+						$('#member_detail #regdate').text(data.regDate);
+						$('#member_detail #birth').text(data.ssn);
+						$('#go_update').click(function(){
+							$('#member_detail #u_pw').html('<input type="text" id="u_pw" placeholder="'+data.pw+'"/>');
+							$('#member_detail #email').html('<input type="text" id="email" placeholder="'+data.email+'"/>');
+							$('#member_detail #major').html('<input type="text" id="major" placeholder="test"/>');
+							$('#member_detail #subject').html('<input type="text" id="subject" placeholder="test"/>');
+							$('#bt_box').html('<input id="confirm" type="button" value ="확인 " /><input id="cancel" type="button" value ="취소 " />')
+							$('#confirm').click(function(){
+								var update_info ={
+										'pw' :$('#password').val(),
+										'email':$('#email').val(),
+										'major':$('#major').val(),
+										'subject':$('#subject').val()
+								};
+								$.ajax({
+									url:app.context()+'/member/update',
+									type:'post',
+									contentType:'application/json',
+									data :JSON.stringify(update_info),
+									dataType:'JSON',
+									success : function(data){
+										 if(data.message==='success'){
+					    					  member.detail();
+					    				  }else{
+					    					  alert('서버는 다녀왔는데 실패함 !!');
+					    				  }
+									},
+									error:function(){
+										 alert('정보 수정시 발생한 에러 : '+m);
+									}
+								});
+							});
+						});
+						$('#unregist').click(function(){
+							$('#pub_article').html(UNREGIST_FORM);
+							$('#unregist_bt')
+							$.ajax({
+								url : app.context()+'/member/delete',
+								type : 'POST',
+								data : {'pw':$('u_pw').val()},
+								dataType : 'json',
+								success : function(data){
+									if(data.message==="success1"){
+									alert('아이디나 비번이 일치 하지 않습니다.');
+									  $('#pub_header').empty().load(app.context()+'/member/logined/header');
+		    						  $('#pub_article').html(UNREGIST_FORM);
+									}else{
+										 locaton.href = app.context()+'/';
+										                                                                                                                                        
+										
+										 alert('삭제 성공'); 
+									}                                                                                                                                                    
+								},
+								error : function(xhr,status,msg){
+									alert("삭제 실패"+msg);  
+								}
+							});
+						});
 				});
 			
-				
-			});
 		}
 	};	
 })();
