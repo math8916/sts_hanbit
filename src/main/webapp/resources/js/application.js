@@ -382,7 +382,7 @@ var LOGIN_FORM=
 	+' <div class="checkbox">'
 	+' <label> <input type="checkbox" name="remember_me" value="remember-me"> Remember me</label>'
 	+'</div><input id="login_btn" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</input>'
-	+'</form></section>'
+	+'</form></section>';
 var SIGN_UP_FORM =
 		'<section class="box"><form id="member_regist_form" >'
 		+'<div ><label for="inputEmail3" class="col-sm-2 control-label">이름</label><div><input type="input_name"  id="inputEmail3"placeholder="Name"></div></div>'
@@ -410,7 +410,94 @@ var SIGN_UP_FORM =
 		+'<label ><input type="radio" name="subject" value="html"> HTML<br/>'
 		+'</label></div></div></div>'
 		+'<input id="bt_join" type="submit" value="회원가입" />'
-		 +' <input id="bt_cancel" type="reset" value="취소" /></form></section>'
+		 +' <input id="bt_cancel" type="reset" value="취소" /></form></section>';
+var DETAIL_FORM=
+	'<div class="box">'
+	+'<h1>회원상세정보</h1>'
+	+'<table id="member_detail">'
+	+'<tr>'
+	+'<td rowspan="5" style="width:30%">'
+	+'<img id="img" src="'+app.img()+'/" alt="며느리" width="104" height="142"> </td>'
+	+'<td style="width:20%" class="font_bold bg_color_yellow">ID</td>'
+	+'<td id="id" style="width:40%"></td>'
+	+'</tr>'
+	+'<tr>'
+	+'<td class="font_bold bg_color_yellow">이 름</td>'
+	+'<td id="name"></td>'
+	+'</tr>'
+	+'<tr>'
+	+'<td class="font_bold bg_color_yellow">성 별</td>'
+	+'<td id="gender"></td>'
+	+'</tr>'
+	+'<tr>'
+	+'<td class="font_bold bg_color_yellow">이메일</td>'
+	+'<td id="email"></td>'
+	+'</tr>'
+	+'<tr>'
+	+'<td class="font_bold bg_color_yellow">전공과목</td>'
+	+'<td  id="major"></td>'
+	+'</tr>'
+	+'<tr>'
+	+'<td  class="font_bold bg_color_yellow">수강과목</td>'
+	+'<td id="subject" colspan="2"></td>'
+	+'</tr>'
+	+'<tr>'
+	+'<td  class="font_bold bg_color_yellow">생년월일</td>'
+	+'<td id="birth" colspan="2"></td>'
+	+'</tr>'
+	+'<tr>'
+	+'<td  class="font_bold bg_color_yellow">등록일</td>'
+	+'<td id="regdate" colspan="2"></td>'
+	+'</tr>'
+	+'</table>'
+	+'<br />'
+	+'<p>'
+	+'</p>'
+	+'</div><input type="button" value="내정보 보기" id="test"/>';
+var UPDATE_FORM=
+	+'<div class="box">'
+	+'<h1>회원상세정보</h1>'
+	+'<table id="member_detail">'
+	+'<tr>'
+	+'<td rowspan="5" style="width:30%">'
+	+'<img src="${img}/choi1.jpg" alt="며느리" width="104"'
+	+'height="142"> </td>'
+	+'<td style="width:20%" class="font_bold bg_color_yellow">ID</td>'
+	+'<td style="width:40%">${member.id}</td>'
+	+'</tr>'
+	+'<tr>'
+	+'<td class="font_bold bg_color_yellow">이 름</td>'
+	+'<td>${member.name}</td>'
+	+'</tr>'
+	+'<tr>'
+	+'<td class="font_bold bg_color_yellow">성 별</td>'
+	+'<td>남</td>'
+	+'</tr>'
+	+'<tr>'
+	+'<td class="font_bold bg_color_yellow">이메일</td>'
+	+'<td>${member.email}</td>'
+	+'</tr>'
+	+'<tr>'
+	+'<td class="font_bold bg_color_yellow">전공과목</td>'
+	+'<td>test</td>'
+	+'</tr>'
+	+'<tr>'
+	+'<td class="font_bold bg_color_yellow">수강과목</td>'
+	+'<td colspan="2">test</td>'
+	+'</tr>'
+	+'<tr>'
+	+'<td class="font_bold bg_color_yellow">생년월일</td>'
+	+'<td colspan="2">900101</td>'
+	+'</tr>'
+	+'<tr>'
+	+'<td class="font_bold bg_color_yellow">등록일</td>'
+	+'<td colspan="2">${member.regDate}</td>'
+	+'</tr>'
+	+'</table>'
+	+'<br />'
+	+'<p>'
+	+'</p>'
+	+'</div>';
 var member = (function() {
 	var _name,_ssn,_gender,_age;
 	var setAge=function(age){this.age=age;}
@@ -538,7 +625,8 @@ var member = (function() {
 						  }
 					});
 					 });
-				$('#check_dup').click(function(){
+				$('#check_dup').click(function(e){
+					e.preventDefault();
 					var $val=$(this).val();
 					if (util.pwChecker($('#id').val())==='yes') {
 						$.ajax({
@@ -548,17 +636,52 @@ var member = (function() {
 								$('#id_box').html('<input type="text"  id="id" placeholder="'+data.message+'"><input type="button" id="re_check_dup" name="re_check_dup" value="다시조회"/>');
 								member.init();
 							}else{
-								$('#id_box').html('<input type="text"  id="id" placeholder="'+data.message+'"><input type="button" id="use_input_id" name="use_input_id" value="그대로 사용"/>');
+								alert('디버깅 1호');
+								$('#id_box').html('<input type="text"  id="id" value="'+data.temp+'"><input type="button" id="use_input_id" name="use_input_id" value="그대로 사용"/>');
 								member.init();
-								$('#use_input_id').click(function(){alert('그대로 사용');});
-								var use_id =data.temp;
-								var password =$('#password').val();
-								$('#bt_join').click(function(){	});
+								
+								$('#bt_join').click(function(e){	
+									e.preventDefault();
+									var join_info ={
+											'id' :$('#id').val(),
+											'pw' :$('#password').val(),
+											'name':$('#name').val(),
+											'ssn':$('#ssn').val(),
+											'email':$('#email').val(),
+											'phone':$('#phone').val()
+									};
+									
+									/*$('#radio').val();
+									$('#ck_subject').val();*/
+
+									$.ajax({
+										
+										url:app.context()+'/member/signup',
+										type:'post',
+										contentType:'application/json',
+										data :JSON.stringify(join_info),
+										dataType:'JSON',
+										success:function(data){
+											alert('디버깅 2호');
+											if (data.message==='success') {
+												alert('디버깅 3호');
+												member.pub_login_form();
+											} else {
+												alert('알수 없는 에러입니다.');
+											}
+										},
+										error:function(x,s,m){
+											alert('회원가입 실패!!!!!'+m);
+										}
+										
+										
+									});
+								});
 								
 							}
 							},
 							error:function(xhr,status,msg){
-								alert('회원 중복 실패 :'+ msg)
+								alert('회원 중복 실패 :'+ msg);
 							}
 						});
 						
@@ -569,6 +692,36 @@ var member = (function() {
 					}
 					
 				});
+		},
+		detail : function(){
+			$('#pub_header').empty().load(app.context()+'/member/logined/header');
+			$('#pub_article').html(DETAIL_FORM);
+			$('#test').click(function(){
+				alert('데이타 성공에 :');
+				
+				$.ajax({
+					url:app.context()+'/member/detail',
+					type:'get',
+					dataType:'json',
+					success:function(data){
+						
+						$('#member_detail #img').attr('src',app.img()+'/'+data.profileImg)
+						$('#member_detail #id').text(data.id)
+						$('#member_detail #name').text(data.name)
+						$('#member_detail #gender').text(data.gender)
+						$('#member_detail #email').text(data.email)
+						$('#member_detail #major').text('test')
+						$('#member_detail #subject').text('test')
+						$('#member_detail #regdate').text(data.regDate)
+						$('#member_detail #birth').text(data.ssn)
+					},
+					error:function(x,s,m){
+						alert('데이타 가져오기 실패 :'+ m);
+					}
+				});
+			
+				
+			});
 		}
 	};	
 })();

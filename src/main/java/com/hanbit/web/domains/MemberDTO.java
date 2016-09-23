@@ -32,6 +32,7 @@ public class MemberDTO implements Serializable{
 	@Getter @Setter private String profileImg;
 	@Getter @Setter private String email;
 	@Getter @Setter private String birth;
+	@Getter @Setter private String phone;
 	
 
 	

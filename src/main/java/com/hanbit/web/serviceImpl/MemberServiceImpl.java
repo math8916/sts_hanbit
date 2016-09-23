@@ -68,12 +68,10 @@ public class MemberServiceImpl implements MemberService {
 		return 0;
 	}
 
-	@Override
-	public String regist(MemberDTO mem) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	   @Override
+	   public String regist(MemberDTO member) {
+	      return (sqlSession.getMapper(MemberMapper.class).insert(member) == 1)?"success":"fail";
+	   }
 	@Override
 	public void update(MemberDTO mem) {
 		// TODO Auto-generated method stub

@@ -18,5 +18,6 @@ public interface MemberMapper {
 	public boolean login(MemberDTO param);
 	public int existId(String id);
 	public MemberDTO findOne(Command command);
+	public String regist(MemberDTO mem);
 
 }

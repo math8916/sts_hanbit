@@ -63,4 +63,6 @@
 </nav>
 <script type="text/javascript">
 $('#logout').on('click',function(){location.href = app.context()+'/member/logout';});
+$('#a_detail').on('click',function(){member.detail()});
+
 </script>
