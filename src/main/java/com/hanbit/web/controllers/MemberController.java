@@ -1,5 +1,8 @@
 package com.hanbit.web.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -26,6 +29,7 @@ import com.hanbit.web.serviceImpl.MemberServiceImpl;
 @RequestMapping("/member")
 public class MemberController {
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+	public static int PG_SIZE=5;
 	@Autowired MemberServiceImpl service;
 	@Autowired Command command;
 	@Autowired MemberDTO member;
@@ -83,8 +87,7 @@ public class MemberController {
 		logger.info("go to {}", "main");
 		return "admin:member/content.tiles";
 	}
-	@RequestMapping(value="/signup",method=RequestMethod.POST,
-			consumes="application/json")
+	@RequestMapping(value="/signup",method=RequestMethod.POST)
 	public @ResponseBody Retval signup(@RequestBody MemberDTO param) {
 		logger.info("SIGN UP {}","EXEUTE");
 		logger.info("SIGN UP ID = {}",param.getId());
@@ -93,22 +96,41 @@ public class MemberController {
 		logger.info("SIGN UP SSN = {}",param.getSsn());
 		logger.info("SIGN UP EMAIL = {}",param.getEmail());
 		logger.info("SIGN UP PHONE = {}",param.getPhone());
-		// retval.setMessage(service.regist(param));
 		retval.setMessage("success");
+		service.regist(param);
 		logger.info("SIGN UP REVAL = {}",retval.getMessage());
 		return retval;
 	}
 	@RequestMapping(value="/update",method=RequestMethod.POST,
 			consumes="application/JSON")
-	public @ResponseBody Retval moveUpdate(@RequestBody MemberDTO param) {
+	public @ResponseBody Retval moveUpdate(@RequestBody MemberDTO param , HttpSession session) {
 		logger.info("Go to! {}", "update");
-		logger.info("SIGN UP PW = {}",param.getPw());
-		logger.info("SIGN UP EMAIL = {}",param.getEmail());
-		logger.info("SIGN UP SSN = {}",param.getMajor());
-		logger.info("SIGN UP PHONE = {}",param.getSubject());
-		retval.setMessage("success");
+		logger.info("update ID = {}",param.getId());
+		logger.info("update PW = {}",param.getPw());
+		logger.info("update EMAIL = {}",param.getEmail());
+		logger.info("update Major = {}",param.getMajor());
+		logger.info("update Subject = {}",param.getSubject());
+		MemberDTO temp = (MemberDTO) session.getAttribute("user");
+		temp.setPw(param.getPw());
+		temp.setEmail(param.getEmail());
+	
+		retval.setMessage(service.update(temp));
+		
 		return retval;
 	}
+	   @RequestMapping(value="/unregist", method=RequestMethod.POST)
+	   public @ResponseBody Retval moveUnregist(@RequestParam("pw") String pw, HttpSession session){
+	      logger.info("GO:: {}","unregist");
+	      member.setPw(pw);
+	      if (pw.equals(session.getAttribute("pw"))) {
+	         retval.setMessage("success");
+	         service.delete(member);
+	         session.invalidate();
+	      }else{
+	         retval.setMessage("fail");
+	      }
+	      return retval;
+	   }
 	@RequestMapping("/check_dup/{id}")
 	public @ResponseBody Retval CheckDup(@PathVariable String id) {
 		logger.info("Go to 중복체크! {}", "EXECUTE");
@@ -130,6 +152,39 @@ public class MemberController {
 		logger.info("RETVAL IS {}",retval.getMessage());
 		return retval;
 	}
+	@RequestMapping("/list/{pgNum}")
+	public String list(@PathVariable String strPgNum
+			,Model model){
+		List<MemberDTO> list = new ArrayList<MemberDTO>();
+		int pgNum =Integer.parseInt(strPgNum);
+		int totCount= service.count();
+		int pgCount =totCount/PG_SIZE;
+		int startRow=0;
+		int endRow =0;
+		if(totCount%PG_SIZE==0){
+			startRow =0;
+			endRow=0;
+		}else{
+			startRow =0;
+			endRow=0;
+		}
+		command.setStart(startRow);
+		command.setEnd(endRow);
+		
+		model.addAttribute("list",service.list(command));
+		return "admin:member/list.tiles";
+	}
+	@RequestMapping("/search")
+	public String search(
+		@RequestParam(value="keyField") String keyField,
+		@RequestParam(value="keyword") String keyword,
+		@RequestParam(value="pgNum") String startPgNum,
+			Model model){
+		List<MemberDTO> list = new ArrayList<MemberDTO>();
+	/*	service.list();*/
+		model.addAttribute("list",list);
+		return "admin:member/list.tiles";
+	}
 	@RequestMapping("/find_by_id")
 	public String moveFind_by_id() {
 		logger.info("Go to! {}", "find_by_id");
@@ -146,11 +201,7 @@ public class MemberController {
 		logger.info("session !{}", "clear");
 		return "redirect:/";
 	}
-	@RequestMapping("/list")
-	public String moveList() {
-		logger.info("Go to!{}", "list");
-		return "admin:member/list.tiles";
-	}
+	
 	@RequestMapping("/find_by")
 	public String moveFind_by() {
 		logger.info("Go to!{}", "find_by");

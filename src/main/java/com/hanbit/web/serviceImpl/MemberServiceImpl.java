@@ -57,9 +57,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<?> list() {
+	public List<?> list(Command command) {
 		// TODO Auto-generated method stub
-		return null;
+		return list(command);
 	}
 
 	@Override
@@ -70,13 +70,22 @@ public class MemberServiceImpl implements MemberService {
 
 	   @Override
 	   public String regist(MemberDTO member) {
-	      return (sqlSession.getMapper(MemberMapper.class).insert(member) == 1)?"success":"fail";
+	      return (sqlSession.getMapper(MemberMapper.class).insert(member) == -1)?"success":"fail";
 	   }
 	@Override
-	public void update(MemberDTO mem) {
-		// TODO Auto-generated method stub
-		
-	}
+	   public String update(MemberDTO member) {
+	      MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+	      int result = mapper.update(member);
+	      String retval = "";
+	      if (result == 1) {
+	         retval = "success";
+	         System.out.println("서비스 수정결과 성공");
+	      } else {
+	         retval = "fail";
+	         System.out.println("서비스 수정결과 실패");
+	      }
+	      return retval;
+	   }
 
 	@Override
 	public void delete(MemberDTO mem) {
@@ -124,5 +133,13 @@ public class MemberServiceImpl implements MemberService {
 		logger.info("MemberService existId ID = {}",id);
 		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
 		return mapper.existId(id);
+	}
+
+
+
+	@Override
+	public List<?> list() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

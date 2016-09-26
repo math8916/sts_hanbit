@@ -24,6 +24,7 @@ import lombok.Setter;
 public class MemberDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Getter @Setter private String id;
+	//@Getter @Setter private String mem_id;
 	@Getter @Setter private String pw;
 	@Getter @Setter private String name;
 	@Getter @Setter private String regDate;

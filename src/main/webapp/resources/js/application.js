@@ -344,8 +344,10 @@ var admin= (function () {
 init:init,
 getPass : getPass,
 setpass : setPass,
-
 check : function() {
+	controller.move('admin','main');
+},
+check2 : function() {
 	setPass(1);
 	var isAdmin = window.confirm('관리자입니까? :');
 	if (!isAdmin) {
@@ -385,15 +387,15 @@ var LOGIN_FORM=
 	+'</form></section>';
 var SIGN_UP_FORM =
 		'<section class="box"><form id="member_regist_form" >'
-		+'<div ><label for="inputEmail3" class="col-sm-2 control-label">이름</label><div><input type="input_name"  id="inputEmail3"placeholder="Name"></div></div>'
+		+'<div ><label for="inputEmail3" class="col-sm-2 control-label">이름</label><div><input type="input_name"  id="name" placeholder="Name"></div></div>'
 		+'<div ><label for="inputEmail3" class="col-sm-2 control-label">ID</label><div id="id_box"><input type="text"  id="id" placeholder="ID"><input type="button" id="check_dup" value="중복체크"/></div></div>'
 		+'<div ><label for="inputEmail3" class="col-sm-2 control-label">Password</label><div><input type="password"  name="password" id="password" placeholder="8자리이상 입력해주세요"></div></div>'
 		+'<div ><label for="inputEmail3" class="col-sm-2 control-label">Password 확인</label><div><input type="password" name="chpass"  id="chpass" placeholder="8자리이상 입력해주세요"></div></div>'
 		+'<div>  <font name="check" size="2" color="red"></font> </div>'
-		+'<div ><label for="inputEmail3" class="col-sm-2 control-label">SSN</label><div><input type="input_name"  id="inputEmail3"placeholder="123456-1"></div></div>'
-		+'<div ><label for="inputEmail3" class="col-sm-2 control-label">E-mail</label><div><input type="input_name"  id="inputEmail3"placeholder="email@mail.com"></div></div>'
+		+'<div ><label for="inputEmail3" class="col-sm-2 control-label">SSN</label><div><input type="input_name"  id="ssn" placeholder="123456-1"></div></div>'
+		+'<div ><label for="inputEmail3" class="col-sm-2 control-label">E-mail</label><div><input type="input_name"  id="email" placeholder="email@mail.com"></div></div>'
 		+'<div ><label for="inputEmail3" class="col-sm-2 control-label">Phone</label>'
-		+'<div><input type="input_name"  id="inputEmail3"placeholder="010-1234-1234"></div></br>'
+		+'<div><input type="input_name"  id="phone" placeholder="010-1234-1234"></div></br>'
 		+'<div id="rd_major">'
 		+'<label for="inputEmail3" class="col-sm-2 control-label">전 공</label>'
 		+'<label ><input type="radio"  name="major" value="computer">컴공학부</label>'
@@ -463,7 +465,7 @@ var UNREGIST_FORM=
 	+'<h3>탈퇴하시려면 비밀번호를 다시 입력해 주세요</h3>'
 	+'<form id="member_delete_form" class="navbar-form navbar-left" role="search">'
 	+'<div class="form-group">'
-	+'<input id="u_pw" type="text" class="form-control" placeholder="PASSWORD">'
+	+'<input id="delete_pw" type="text" class="form-control" placeholder="PASSWORD">'
 	+'</div>'
 	+'<button id="unregist_bt" type="submit" class="btn btn-default" value="탈 퇴">Submit</button>'
 	+'</form>'
@@ -625,9 +627,8 @@ var member = (function() {
 									$('#ck_subject').val();*/
 
 									$.ajax({
-										
 										url:app.context()+'/member/signup',
-										type:'post',
+										type:'POST',
 										contentType:'application/json',
 										data :JSON.stringify(join_info),
 										dataType:'JSON',
@@ -678,15 +679,17 @@ var member = (function() {
 						$('#member_detail #regdate').text(data.regDate);
 						$('#member_detail #birth').text(data.ssn);
 						$('#go_update').click(function(){
-							$('#member_detail #u_pw').html('<input type="text" id="u_pw" placeholder="'+data.pw+'"/>');
-							$('#member_detail #email').html('<input type="text" id="email" placeholder="'+data.email+'"/>');
-							$('#member_detail #major').html('<input type="text" id="major" placeholder="test"/>');
-							$('#member_detail #subject').html('<input type="text" id="subject" placeholder="test"/>');
+							$('#member_detail #u_pw').html('<input type="text" id="update_pw" value="'+data.pw+'"/>');
+							$('#member_detail #email').html('<input type="text" id="update_email" value="'+data.email+'"/>');
+							$('#member_detail #major').html('<input type="text" id="major" value="test"/>');
+							$('#member_detail #subject').html('<input type="text" id="subject" value="test"/>');
 							$('#bt_box').html('<input id="confirm" type="button" value ="확인 " /><input id="cancel" type="button" value ="취소 " />')
 							$('#confirm').click(function(){
+							
 								var update_info ={
-										'pw' :$('#password').val(),
-										'email':$('#email').val(),
+										'id' :$('#member_detail #id').html(),
+										'pw' :$('#update_pw').val(),
+										'email':$('#update_email').val(),
 										'major':$('#major').val(),
 										'subject':$('#subject').val()
 								};
@@ -703,7 +706,7 @@ var member = (function() {
 					    					  alert('서버는 다녀왔는데 실패함 !!');
 					    				  }
 									},
-									error:function(){
+									error:function(x,s,m){
 										 alert('정보 수정시 발생한 에러 : '+m);
 									}
 								});
@@ -713,12 +716,12 @@ var member = (function() {
 							$('#pub_article').html(UNREGIST_FORM);
 							$('#unregist_bt')
 							$.ajax({
-								url : app.context()+'/member/delete',
+								url : app.context()+'/member/unregist',
 								type : 'POST',
-								data : {'pw':$('u_pw').val()},
+								data : {'pw':$('delete_pw').val()},
 								dataType : 'json',
 								success : function(data){
-									if(data.message==="success1"){
+									if(data.message==="success"){
 									alert('아이디나 비번이 일치 하지 않습니다.');
 									  $('#pub_header').empty().load(app.context()+'/member/logined/header');
 		    						  $('#pub_article').html(UNREGIST_FORM);
