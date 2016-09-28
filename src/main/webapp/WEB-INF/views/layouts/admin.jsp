@@ -52,29 +52,25 @@
 
  </head>
   <body>
-        <header>
-        <div >
-        <tiles:insertAttribute name="header" />
-        </div>
+      <header>
+          <div id="adm_header">	
+          <tiles:insertAttribute name="header" />
+          </div>
       </header>
-        <nav>
-        <tiles:insertAttribute name="menu" />
-        </nav>
+        <nav id="adm_nav">
+          <tiles:insertAttribute name="menu" />
+        </nav> 
         <section>
-        <article>
-        <tiles:insertAttribute name="body" /> 
-        </article>  
+        <article id="adm_article">	
+          <tiles:insertAttribute name="body" />
+          </article>
         </section>
-        <footer>
-       <tiles:insertAttribute name="footer" /> 
-        </footer>
+      <footer id="adm_footer">
+          <tiles:insertAttribute name="footer" />
+      </footer>
   </body>
-    <script src="${js}/application.js">  </script>
-  
-  <script> 
-   app.init('${context}');
- 
-  
-   
-   </script>
+  <script src="${js}/application.js"></script>
+  <script>
+  app.init('${context}');
+  </script>
 </html>

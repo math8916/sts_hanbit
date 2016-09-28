@@ -5,9 +5,12 @@ package com.hanbit.web.services;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.hanbit.web.domains.Command;
 import com.hanbit.web.domains.MemberDTO;
-import com.hanbit.web.util.CommonService;
+import com.hanbit.web.domains.Retval;
+
 
 /**
  * @date  : 2016. 6. 17.
@@ -15,8 +18,8 @@ import com.hanbit.web.util.CommonService;
  * @file  : StudentService.java
  * @story :
  */
-
-public interface MemberService extends CommonService{
+@Component
+public interface MemberService{
 	public String regist(MemberDTO mem);
 	public MemberDTO findOne(Command command);
 	public String update(MemberDTO mem);
@@ -27,6 +30,8 @@ public interface MemberService extends CommonService{
 	public MemberDTO login(MemberDTO member);
 	public void logoutSession(MemberDTO member);
 	public int existId(String id);
-	List<?> list(Command command);
+	public List<?> list(Command command);
+	public Retval count();
+	public List<?> find(Command command);
 	
 }

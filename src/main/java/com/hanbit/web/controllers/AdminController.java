@@ -17,4 +17,14 @@ public class AdminController {
 		logger.info("Welcome home! The client locale is 1111{}", "디버깅 모드");
 		return "admin:admin/content.tiles";
 	}
+	@RequestMapping("/header")
+	public String adminHeader(){
+		logger.info("----- ADMIN_CONTOLLER HEADER PASS -----");
+		return "admin/header.jsp";
+	}
+	@RequestMapping("/nav")
+	public String adminNav(){
+		logger.info("----- ADMIN_CONTOLLER NAV PASS -----");
+		return "admin/nav.jsp";
+	}
 }

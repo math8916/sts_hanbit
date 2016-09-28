@@ -1,7 +1,6 @@
 package com.hanbit.web.serviceImpl;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -12,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.hanbit.web.controllers.MemberController;
 import com.hanbit.web.domains.Command;
 import com.hanbit.web.domains.MemberDTO;
+import com.hanbit.web.domains.Retval;
 import com.hanbit.web.mappers.MemberMapper;
 import com.hanbit.web.services.MemberService;
 
@@ -28,6 +28,7 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired	private SqlSession sqlSession;
 	@Autowired	private MemberDTO member;
 	@Autowired  private Command command ;
+	@Autowired  private Retval retval ;
 
 
 	public void logoutSession(MemberDTO member) {
@@ -42,10 +43,6 @@ public class MemberServiceImpl implements MemberService {
 	public List<?> findBy(String keyword) {
 		return null;
 	}
-	@Override
-	public Map<?, ?> map() {
-		return null;
-	}
 	
 	public String myAccount() {
 		return member.toString();
@@ -58,14 +55,13 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public List<?> list(Command command) {
-		// TODO Auto-generated method stub
-		return list(command);
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		return mapper.list(command);
 	}
-
 	@Override
-	public int count() {
-		// TODO Auto-generated method stub
-		return 0;
+	public Retval count() {
+		 MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		return mapper.count();
 	}
 
 	   @Override
@@ -134,12 +130,11 @@ public class MemberServiceImpl implements MemberService {
 		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
 		return mapper.existId(id);
 	}
-
-
-
 	@Override
-	public List<?> list() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<?> find(Command command) {
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		return mapper.find(command);
 	}
+
+
 }

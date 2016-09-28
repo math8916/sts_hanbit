@@ -62,11 +62,7 @@ public class GradeServiceImpl implements GradeService{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	@Override
-	public int count() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	
 	@Override
 	public String insert(GradeDTO grade) {
 		// TODO Auto-generated method stub

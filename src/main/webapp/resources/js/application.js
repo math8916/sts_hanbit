@@ -298,7 +298,112 @@ var user = (function(){
 	};
 	return{
 		init:init,
+		student_list : function(pgNum){
+			$('#adm_header').empty().load(app.context()+'/admin/header');
+			$('#adm_nav').empty().load(app.context()+'/admin/nav');
+			$('#adm_article').empty();
+			$.getJSON(app.context()+'/member/list/'+pgNum,function(data){
+				var frame = '';
+				var startPg = data.startPg;
+				var lastPg = data.lastPg;
+				var pgSize = data.pgSize;
+				var totPg = data.totPg;
+				var groupSize = data.groupSize;
+				console.log('스타트페이지'+startPg);
+				console.log('라스트페이지'+lastPg);
+				console.log('페이지사이즈'+pgSize);
+				console.log('토탈페이지'+totPg);
+				console.log('그룹사이즈'+groupSize);
+				var student_list = '<ul class="list-group">';
+				student_list += '<li class="list-group-item">총학생수 : '
+					+data.totCount+'</li>';
+				student_list += '</ul>'
+					+'<div class="panel panel-primary">'
+					+'<div class="panel-heading">학생 리스트</div>'
+					+'<table id="member_list_table">'
+					+'<tr>'
+					+'<th>ID</th>'
+					+'<th>이 름</th>'
+					+'<th>등록일</th>'
+					+'<th>생년월일</th>'
+					+'<th>이메일</th>'
+					+'<th>전화번호</th>'
+					+'<th>성적</th>'
+					+'</tr>'
+					+'<tbody>';
+				if(data.count == 0){
+					student_list+='<tr><td colspan=7>등록된 학생이 없습니다</td></tr>';
+				}else{
+					$.each(data.list, function(i,member){
+						student_list+=
+							'<tr>'
+							+'<td>'+member.id+'</td>'
+							+'<td><a class="name">'+member.name+'</a></td>'
+							+'<td>'+member.regDate+'</td>'
+							+'<td>'+member.ssn+'</td>'
+							+'<td>'+member.email+'</td>'
+							+'<td>'+member.phone+'</td>'
+							+'<td><a class="regist">등록</a> / <a class="update">수정</a></td>'
+							+'</tr>';
+					});
+					
+				}
+				student_list += '</tbody></table>'
+				var pagination='<nav aria-label="Page navigation" align="center"><ul class="pagination">';
+				if((startPg-lastPg) > 0){
+					pagination += 
+						'<li>'
+						+'<a href="'+app.context()+'/member/list/'+(startPg-lastPg)+'" aria-label="Previous">'
+						+'<span aria-hidden="true">&laquo;</span>'
+						+'</a>'
+						+'</li>';
+				}
+				for(var i=startPg; i<=lastPg; i++){
+					if(i==pgNum){
+						pagination +='<font color="red">'+i+'</font>';
+					}else{
+						pagination += '<a href="#" onclick="user.student_list('+i+')">'+i+'</a>';
+					}
+				}
+				if(startPg + pgSize <= totPg){
+					pagination += 
+						'<li>'
+						+'<a href="'+app.context()+'/member/list/'+(startPg-pgSize)+'}" aria-label="Next">'
+						+ '<span aria-hidden="true">&laquo;</span>'
+						+'</a>'
+						+'</li>';
+				}
+				pagination += '</ul></nav>'
+				var search_form =
+					'<div align="center">'
+					+'<form action="'+app.context()+'/member/search" method="post">'
+					+'<select name="keyField" id="keyField">'
+					+'<option value="name" selected>이름</option>'
+					+'<option value="mem_id">ID</option>'
+					+'</select>'
+					+'<input type="text" name="keyword">'
+					+'<input type="submit" name="검 색">'
+					+'</form>'
+					+'</div>'
+					+'</div>'
+					+'</div>';
+				frame += student_list;
+				frame += pagination;
+				frame += search_form;
+				
+				$('#adm_article').html(frame);
+				  $('#find_submit').click(function(){
+		               if ($('#keyword').val().length > 0) {
+		                  user.find_student($('#keyword').val());
+		               } else {
+		                  alert('검색어를 입력해주세요');
+		                  $('#keyword').focus();
+		                  return false;
+		               }
+		            })
+			});
 			
+		}	
 		
 	};
 })();
@@ -322,7 +427,7 @@ var admin= (function () {
 	};
 	var onCreate = function(){
 		setContentView();
-		$('#admin_nav #member_mgmt #list').click(function(){controller.move('member','list');});
+		$('#admin_nav #member_mgmt #list').click(function(){user.student_list(1)});
 		$('#admin_nav #member_mgmt #find_by').click(function(){controller.move('member','find_by');});
 		$('#admin_nav #member_mgmt #count').click(function(){controller.move('member','count');});
 		$('#admin_nav #account_mgmt #b_delete').click(function(){controller.move('account','b_delete');});
@@ -526,7 +631,7 @@ var member = (function() {
 		$('#delete').click(function(){location.href=controller.move('member','delete')})
 		$('#login').click(function(){location.href=controller.move('member','login')})
 		$('#logout').click(function(){location.href=controller.move('member','logout')})
-		$('#list').click(function(){location.href=controller.move('member','list')})
+		/*$('#list').click(function(){location.href=controller.move('member','list')})*/
 		$('#find_by').click(function(){location.href=controller.move('member','find_by')})
 		$('#count').click(function(){location.href=controller.move('member','count')})
 		$('#member_find_form input[type="submit"]').click(function(){('#member_find_form').submit();});

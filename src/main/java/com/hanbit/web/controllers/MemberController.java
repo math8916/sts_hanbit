@@ -1,6 +1,7 @@
 package com.hanbit.web.controllers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -10,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,10 +21,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.hanbit.web.constants.Values;
 import com.hanbit.web.domains.Command;
 import com.hanbit.web.domains.MemberDTO;
 import com.hanbit.web.domains.Retval;
 import com.hanbit.web.serviceImpl.MemberServiceImpl;
+import com.hanbit.web.util.Pagination;
 
 @Controller
 @SessionAttributes({"user","context","js","css","img"})
@@ -153,26 +157,42 @@ public class MemberController {
 		return retval;
 	}
 	@RequestMapping("/list/{pgNum}")
-	public String list(@PathVariable String strPgNum
-			,Model model){
-		List<MemberDTO> list = new ArrayList<MemberDTO>();
-		int pgNum =Integer.parseInt(strPgNum);
-		int totCount= service.count();
-		int pgCount =totCount/PG_SIZE;
-		int startRow=0;
-		int endRow =0;
-		if(totCount%PG_SIZE==0){
-			startRow =0;
-			endRow=0;
-		}else{
-			startRow =0;
-			endRow=0;
-		}
-		command.setStart(startRow);
-		command.setEnd(endRow);
+	public @ResponseBody HashMap<String,Object> list(@PathVariable String pgNum,ModelMap model){
+		logger.info("LIST pgNum is {}",pgNum);
 		
-		model.addAttribute("list",service.list(command));
-		return "admin:member/list.tiles";
+		int[]pages = new int[3];
+		int[]rows = new int[2];
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		Retval r = service.count();
+		int totCount = r.getCount();
+		pages = Pagination.getPages(totCount, Integer.parseInt(pgNum));
+		rows = Pagination.getRows(totCount, Integer.parseInt(pgNum), Values.PG_SIZE); 
+		command.setStart(rows[0]);
+		command.setEnd(rows[1]);
+		logger.info("LIST totCount {}",totCount);
+		logger.info("LIST pgSize {}",Values.PG_SIZE);
+		logger.info("LIST totCount {}",totCount);
+		logger.info("LIST totPg {}",pages[2]);
+		logger.info("LIST pgNum {}",pgNum);
+		logger.info("LIST startPg {}",pages[0]);
+		logger.info("LIST lastPg {}",pages[1]);
+	/*	model.addAttribute("list", service.list(command));
+		model.addAttribute("pgSize", Values.PG_SIZE);
+		model.addAttribute("totCount", totCount);
+		model.addAttribute("totPg", pages[2]);
+		model.addAttribute("pgNum", Integer.parseInt(pgNum));
+		model.addAttribute("startPg", pages[0]);
+		model.addAttribute("lastPg", pages[1]);*/
+		map.put("list", service.list(command));
+		map.put("pgSize", Values.PG_SIZE);
+		map.put("totCount", totCount);
+		map.put("totPg", pages[2]);
+		map.put("pgNum", Integer.parseInt(pgNum));
+		map.put("startPg", pages[0]);
+		map.put("lastPg", pages[1]);
+		map.put("groupSize", Values.GROUP_SIZE);
+		
+		return map;
 	}
 	@RequestMapping("/search")
 	public String search(

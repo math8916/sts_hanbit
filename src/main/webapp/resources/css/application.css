@@ -32,7 +32,7 @@ a{cursur:point;}
 #account_list_table {font-family: arial, sans-serif;border-collapse: collapse;width: 100%;}
 #account_list_table td, th {border: 1px solid #dddddd;text-align: left; padding: 8px;}
 #account_list_table tr:nth-child(even) {background-color: #dddddd;}
-#member_list_table table {font-family: arial, sans-serif;border-collapse: collapse;width: 100%;}
+#member_list_table {font-family: arial, sans-serif;border-collapse: collapse;width: 100%;}
 #member_list_table td, th {border: 1px solid #dddddd;text-align: center ;padding: 8px;}
 #member_list_table tr:nth-child(even) {background-color: #dddddd;}
 #free_board_list_table table {font-family: arial, sans-serif;border-collapse: collapse;width: 90%;}
